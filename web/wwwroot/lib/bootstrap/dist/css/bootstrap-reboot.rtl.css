@@ -26,8 +26,8 @@ body {
   color: var(--bs-body-color);
   text-align: var(--bs-body-text-align);
   background-color: var(--bs-body-bg);
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -Webkit-text-size-adjust: 100%;
+  -Webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 hr {
@@ -100,10 +100,10 @@ p {
 
 abbr[title],
 abbr[data-bs-original-title] {
-  -webkit-text-decoration: underline dotted;
+  -Webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
   cursor: help;
-  -webkit-text-decoration-skip-ink: none;
+  -Webkit-text-decoration-skip-ink: none;
   text-decoration-skip-ink: none;
 }
 
@@ -256,7 +256,7 @@ caption {
 
 th {
   text-align: inherit;
-  text-align: -webkit-match-parent;
+  text-align: -Webkit-match-parent;
 }
 
 thead,
@@ -309,7 +309,7 @@ select:disabled {
   opacity: 1;
 }
 
-[list]::-webkit-calendar-picker-indicator {
+[list]::-Webkit-calendar-picker-indicator {
   display: none;
 }
 
@@ -317,7 +317,7 @@ button,
 [type=button],
 [type=reset],
 [type=submit] {
-  -webkit-appearance: button;
+  -Webkit-appearance: button;
 }
 button:not(:disabled),
 [type=button]:not(:disabled),
@@ -359,23 +359,23 @@ legend + * {
   clear: right;
 }
 
-::-webkit-datetime-edit-fields-wrapper,
-::-webkit-datetime-edit-text,
-::-webkit-datetime-edit-minute,
-::-webkit-datetime-edit-hour-field,
-::-webkit-datetime-edit-day-field,
-::-webkit-datetime-edit-month-field,
-::-webkit-datetime-edit-year-field {
+::-Webkit-datetime-edit-fields-wrapper,
+::-Webkit-datetime-edit-text,
+::-Webkit-datetime-edit-minute,
+::-Webkit-datetime-edit-hour-field,
+::-Webkit-datetime-edit-day-field,
+::-Webkit-datetime-edit-month-field,
+::-Webkit-datetime-edit-year-field {
   padding: 0;
 }
 
-::-webkit-inner-spin-button {
+::-Webkit-inner-spin-button {
   height: auto;
 }
 
 [type=search] {
   outline-offset: -2px;
-  -webkit-appearance: textfield;
+  -Webkit-appearance: textfield;
 }
 
 [type="tel"],
@@ -384,11 +384,11 @@ legend + * {
 [type="number"] {
   direction: ltr;
 }
-::-webkit-search-decoration {
-  -webkit-appearance: none;
+::-Webkit-search-decoration {
+  -Webkit-appearance: none;
 }
 
-::-webkit-color-swatch-wrapper {
+::-Webkit-color-swatch-wrapper {
   padding: 0;
 }
 
@@ -396,9 +396,9 @@ legend + * {
   font: inherit;
 }
 
-::-webkit-file-upload-button {
+::-Webkit-file-upload-button {
   font: inherit;
-  -webkit-appearance: button;
+  -Webkit-appearance: button;
 }
 
 output {

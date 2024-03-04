@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using web.Models;
+using Models;
 
-namespace web.Data
+namespace DataAccess
 {
     public class ApplicationDbContext : DbContext
     {
@@ -16,8 +16,8 @@ namespace web.Data
         {
             modelBuilder.Entity<Category>().HasData(
                 new Category {Id=1 , Name="Action", DisplayOrder=1},
-                new Category {Id=2 , Name="SciFi", DisplayOrder=1},
-                new Category {Id=3 , Name="History", DisplayOrder=1}
+                new Category {Id=2 , Name="SciFi", DisplayOrder=2},
+                new Category {Id=3 , Name="History", DisplayOrder=3}
             );
         }
     }
