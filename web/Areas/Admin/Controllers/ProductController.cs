@@ -1,46 +1,60 @@
-
 using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Models;
-
+using Models.ViewModels;
 
 namespace Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class CategoryController : Controller
+     [Area("Admin")]
+    public class ProductController : Controller
     {
-        private readonly IUnitOfWork _unitOfWrok;
-        public CategoryController(IUnitOfWork unitOfWrok)
+         private readonly IUnitOfWork _unitOfWrok;
+        public ProductController(IUnitOfWork unitOfWrok)
         {
             _unitOfWrok = unitOfWrok;
         }
         public IActionResult Index()
         {
-            var objlist = _unitOfWrok.category.GetAll().ToList();
+            var objlist = _unitOfWrok.Product.GetAll().ToList();
             return View(objlist);
         }
         
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            IEnumerable<SelectListItem> categoryList = _unitOfWrok.category.GetAll()
+                .Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value=u.Id.ToString()
+                });
+            ViewBag.CategoryList = categoryList;
+            ProductVM productVM = new ProductVM(){
+                CategoryList = categoryList,
+                Product = new Product()
+            };
+            return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Create(Category category)
+        public IActionResult Create(ProductVM productVM)
         {
-            if(category.Name == category.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("name","The DisplayOrder cannot exactly match the Name."); 
-            }
             if(ModelState.IsValid)
             {
-                _unitOfWrok.category.Add(category);
+                _unitOfWrok.Product.Add(productVM.Product);
                 _unitOfWrok.Save();
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
-            return View();
+            else{
+                productVM.CategoryList = _unitOfWrok.category.GetAll().Select(u => new SelectListItem 
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()    
+                });
+                return View(productVM);
+            }
         }
         [HttpGet]
         public IActionResult Edit(int? id)
@@ -49,20 +63,20 @@ namespace Web.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Category? category = _unitOfWrok.category.Get(u => u.Id == id);
-            if(category == null)
+            Product? product = _unitOfWrok.Product.Get(u => u.Id == id);
+            if(product == null)
             {
                 return NotFound();
             } 
-            return View(category);
+            return View(product);
         }
 
         [HttpPost]
-        public IActionResult Edit(Category category)
+        public IActionResult Edit(Product product)
         {
             if(ModelState.IsValid)
             {
-                _unitOfWrok.category.Update(category);
+                _unitOfWrok.Product.Update(product);
                 _unitOfWrok.Save();
                 TempData["success"] = "Category update successfully";
                 return RedirectToAction("Index");
@@ -76,26 +90,25 @@ namespace Web.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Category? category = _unitOfWrok.category.Get(u => u.Id == id);
-            if(category == null)
+            Product? product = _unitOfWrok.Product.Get(u => u.Id == id);
+            if(product == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(product);
         }
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int? id)
         {
-            Category? obj = _unitOfWrok.category.Get(u => u.Id == id);
+            Product? obj = _unitOfWrok.Product.Get(u => u.Id == id);
             if(obj == null)
             {
                 return  NotFound();
             }
-            _unitOfWrok.category.Remove(obj);
+            _unitOfWrok.Product.Remove(obj);
             _unitOfWrok.Save();
             TempData["success"] = "Category delete successfully";
             return RedirectToAction("Index");
         }
-
     }
 }
