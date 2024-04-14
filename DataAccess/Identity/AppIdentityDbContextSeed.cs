@@ -1,35 +1,44 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Identity;
 using Models.Identity;
+using Utility.Common;
+
 
 namespace DataAccess.Identity
 {
     public class AppIdentityDbContextSeed
     {
-        public static async Task SeedUsersAsync(UserManager<AppUser> userManager)
+        public static async Task SeedUsersAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            if(!userManager.Users.Any())
+            if(!roleManager.RoleExistsAsync(SD.Role_Customer).GetAwaiter().GetResult())
             {
-                var user= new AppUser
+                roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).GetAwaiter().GetResult();
+                roleManager.CreateAsync(new IdentityRole(SD.Role_Employee)).GetAwaiter().GetResult();
+                roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
+                roleManager.CreateAsync(new IdentityRole(SD.Role_Company)).GetAwaiter().GetResult();
+
+                if(!userManager.Users.Any())
                 {
-                    DisplayName = "bob",
-                    Email = "bob@test.com",
-                    UserName = "bob@test.com",
-                    Address = new Address
+                    var user= new AppUser
                     {
-                        FirstName = "bob",
-                        LastName = "builder",
-                        Street = "10101 S Memorial",
-                        State = "Tx",
-                        ZipCode = "79221"
+                        DisplayName = "bob",
+                        Email = "bob@test.com",
+                        UserName = "bob@test.com",
+                        Address = new Address
+                        {
+                            FirstName = "bob",
+                            LastName = "builder",
+                            Street = "10101 S Memorial",
+                            City = "Humble",
+                            State = "Tx",
+                            ZipCode = "79221"
 
-                    }
-                };
+                        }
+                    };
 
-                await userManager.CreateAsync(user, "Pa$$w0rd");
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                    userManager.AddToRoleAsync(user,SD.Role_Admin).GetAwaiter().GetResult();
+                }
             }
         }
     }

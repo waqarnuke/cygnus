@@ -1,6 +1,8 @@
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using Models.Identity;
 
 namespace DataAccess
 {
@@ -13,7 +15,12 @@ namespace DataAccess
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-
+        public DbSet<Company> Company { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<AppUser> AspNetUsers { get; set; }
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //base.OnModelCreating(modelBuilder); // its use for maping id when you update the identitydB
@@ -22,6 +29,12 @@ namespace DataAccess
                 new Category {Id=1 , Name="Action", DisplayOrder=1},
                 new Category {Id=2 , Name="SciFi", DisplayOrder=2},
                 new Category {Id=3 , Name="History", DisplayOrder=3}
+            );
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company {Id=1 , Name="TechSolution", StreeAddress="12 street block 5", City="Humble",State="Tx", ZipCode="77338", PhoneNumber="03467778889"},
+                new Company {Id=2 , Name="SoftCygnus", StreeAddress="13 street block 6", City="Spring",State="Tx", ZipCode="77339", PhoneNumber="0346123456"},
+                new Company {Id=3 , Name="Microsoft", StreeAddress="14 street block 7", City="Kingwood",State="Tx", ZipCode="77310", PhoneNumber="0346456789"}
             );
 
             modelBuilder.Entity<Product>().HasData(
@@ -36,7 +49,7 @@ namespace DataAccess
                     Price50=85,
                     Price100=80,
                     CategoryId = 1,
-                    ImageUrl=""
+                    ImageUrl="\\images\\product\\fortune of time.jpg"
                 },
                 new Product
                 {
@@ -50,7 +63,7 @@ namespace DataAccess
                     Price50 = 25,
                     Price100 = 20,
                     CategoryId = 1,
-                    ImageUrl=""
+                    ImageUrl="\\images\\product\\dark skies.jpg"
                 },
                 new Product
                 {
@@ -64,7 +77,7 @@ namespace DataAccess
                     Price50 = 40,
                     Price100 = 35,
                     CategoryId = 2,
-                    ImageUrl=""
+                    ImageUrl="\\images\\product\\vanish in the sunset.jpg"
                 },
                 new Product
                 {
@@ -78,7 +91,7 @@ namespace DataAccess
                     Price50 = 60,
                     Price100 = 55,
                     CategoryId = 2,
-                    ImageUrl=""
+                    ImageUrl="\\images\\product\\cotton candy.jpg"
                 },
                 new Product
                 {
@@ -92,7 +105,7 @@ namespace DataAccess
                     Price50 = 25,
                     Price100 = 20,
                     CategoryId = 3,
-                    ImageUrl=""
+                    ImageUrl="\\images\\product\\rock in the ocean back.jpg"
                 },
                 new Product
                 {
@@ -106,7 +119,7 @@ namespace DataAccess
                     Price50 = 22,
                     Price100 = 20,
                     CategoryId = 3,
-                    ImageUrl=""
+                    ImageUrl="\\images\\product\\leaves and wonders.jpg"
                 } 
             );
         }

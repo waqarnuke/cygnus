@@ -1,12 +1,15 @@
 using DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Models;
 using Models.ViewModels;
+using Utility.Common;
 
 namespace Web.Areas.Admin.Controllers
 {
-     [Area("Admin")]
+    [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IWebHostEnvironment _webHostEnviroment;
@@ -122,32 +125,7 @@ namespace Web.Areas.Admin.Controllers
             return View();
         }
         
-        // public IActionResult Delete(int? id)
-        // {
-        //     if(id==null || id == 0)
-        //     {
-        //         return NotFound();
-        //     }
-        //     Product? product = _unitOfWrok.Product.Get(u => u.Id == id);
-        //     if(product == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     return View(product);
-        // }
-        // [HttpPost, ActionName("Delete")]
-        // public IActionResult DeletePost(int? id)
-        // {
-        //     Product? obj = _unitOfWrok.Product.Get(u => u.Id == id);
-        //     if(obj == null)
-        //     {
-        //         return  NotFound();
-        //     }
-        //     _unitOfWrok.Product.Remove(obj);
-        //     _unitOfWrok.Save();
-        //     TempData["success"] = "Category delete successfully";
-        //     return RedirectToAction("Index");
-        // }
+        
 
         #region API CALLS
 

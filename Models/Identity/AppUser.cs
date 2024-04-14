@@ -1,4 +1,6 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Models.Identity
 {
@@ -6,5 +8,10 @@ namespace Models.Identity
     {
         public string DisplayName { get; set; } 
         public Address Address { get; set; }
+        public int? CompanyId { get; set; }
+        [ForeignKey("CompanyId")]
+        [ValidateNever]
+        public Company Compnay { get; set; }
+
     }
 }

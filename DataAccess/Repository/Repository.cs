@@ -1,6 +1,6 @@
 using DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
-
+using System.Linq.Expressions;
 namespace DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
@@ -18,25 +18,38 @@ namespace DataAccess.Repository
             _dbSet.Add(entity);
         }
 
-        public T Get(System.Linq.Expressions.Expression<Func<T, bool>> filter, string? includeProperties = null)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false )
         {
-            IQueryable<T> query = _dbSet;
-            
-            query = query.Where(filter);
-            if(!string.IsNullOrEmpty(includeProperties))
+            IQueryable<T> query ;
+            if(tracked)
             {
-                foreach(var includporp in includeProperties
-                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    query = query.Include(includporp);
-                }
+                query = _dbSet;   
             }
-            return query.FirstOrDefault();
+            else
+            {
+                query  = _dbSet.AsNoTracking();
+            }
+            query = query.Where(filter);
+                if(!string.IsNullOrEmpty(includeProperties))
+                {
+                    foreach(var includporp in includeProperties
+                        .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        query = query.Include(includporp);
+                    }
+                }
+                return query.FirstOrDefault();
+            
         }
 
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter, string? includeProperties = null)
         {
             IQueryable<T> query = _dbSet;
+            if(filter != null)
+            {
+                query = query.Where(filter);
+            
+            }
             if(!string.IsNullOrEmpty(includeProperties))
             {
                 foreach(var includporp in includeProperties
