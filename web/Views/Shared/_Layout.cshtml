@@ -15,7 +15,9 @@
     
     <!-- for datatable -->
     <link rel="stylesheet" href="//cdn.datatables.net/2.0.2/css/dataTables.dataTables.min.css">
-
+    <link rel="stylesheet" href="~/lib/jquery/dist/jquery-ui.min.css">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery-ui.js"></script>
     
   
 </head>
@@ -28,8 +30,8 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -65,15 +67,7 @@
                                 </ul>
                             </li>
                         }
-                        
-                            <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
-                               @await Component.InvokeAsync("ShoppingCart")
-                            </a>
-                        </li>
-                    
-                        
-                        
+                       
                     </ul>
                     <partial name="_LoginPartial"/>
                 </div>
@@ -92,7 +86,7 @@
             Cygnus <i class="bi bi-cup-hot"></i>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.tiny.cloud/1/m3wkqwbojf4yxvh5gb91c1175u81ph3a06uje7in3v52dmz4/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>

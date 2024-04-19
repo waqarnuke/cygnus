@@ -1,43 +1,45 @@
-﻿@model IEnumerable<Product>
+﻿@model Web.ViewModel.ShopVM
 
-<div class="row pb-5">
-    @foreach (var item in Model)
-    {
-        <div class="col-lg-3 col-sm-6">
-            <div class="row p-2">
-                <div class="col-12 p-1">
-                    <div class="card border-0 p-3 shadow border-top border-5 rounded">
-                        <img src="@item.ImageUrl" class=" card-img-top rounded" alt="">
-                        <div class="card-body pb-0">
-                            <div class="pl-1">
-                                <p class="card-title h5 text-dark opacity-75 text-upercase text-center">@item.Title</p>
-                                <p class="card-title text-warning text-center">@item.Author</p>
-                            </div>
-                            <div class="pl-1">
-                                <p class="text-dark opacity-75 text-center mb-0">
-                                    List Price: 
-                                    <span class="text-decoration-line-through">
-                                        @item.ListPrice.ToString("c")
-                                    </span> 
-                                </p>
-                            </div>
-                            <div class="pl-1">
-                                <p class="text-dark opacity-75 text-center">
-                                    As low as: 
-                                    <span>
-                                        @item.Price100.ToString("c")
-                                    </span> 
-                                </p>
-                            </div>
-                        </div>
-                        <div>
-                            <a asp-action="Details" asp-route-productId="@item.Id" class="btn btn-primary bg-gradient border-0 from-control">
-                                Details
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<div class="row">
+    <div class="col-lg-3">
+        <div class="input-group mb-3">
+            <input id="textSearch" class="form-control boder-0 shadow" type="text" name="Search">
+            <button type="button" id="serchBtn" class="btn btn-secondary">serach</button>
+        </div>
+        @await Component.InvokeAsync("Category")
+    </div>
+    <div class="col-lg-9">
+        
+        <div class="row pb-5">
+        
+            <div id=tableContainer>
+                @* @await Component.InvokeAsync("Product", new {search = Model != null ? @Model : "", pageNo = 1, })
+                @await Component.InvokeAsync("Shop", new {search = Model.search != null ? Model.search : "", pageNo = Model.PageNo, minimumPrice = Model.MinimubPrice ,maximumPrice = Model.MaximumPrice ,categoryId = Model.CategoryId }) 
+                *@
+                @await Component.InvokeAsync("Shop", Model)
             </div>
         </div>
-    }
 </div>
+
+
+
+<script>
+    $("#serchBtn").click(function(){
+        var searchValue = $("#textSearch").val();
+        
+        $.ajax({
+            url:'/Customer/Shop/GetNewList',
+            data:{
+                search :searchValue
+            }
+        })
+        .done(function(response){
+            $("#tableContainer").html(response);
+        })
+        .fail(function(XMLHttpRequest, textSearch, errorThrown) {
+            alert("fail")
+        });
+
+    });
+
+</script>

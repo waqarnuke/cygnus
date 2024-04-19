@@ -1,0 +1,103 @@
+﻿@model IEnumerable<SelectListItem>
+@using Utility.Common
+
+@* <div class="row pb-5">
+    <select asp-items="Model.ToList()" class="form-select boder-0 shadow">
+        <option disabled selected>--Select Category</option>
+    </select>
+</div> *@
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-primary">Category</span>
+</h4>
+<ul class="list-group mb-3">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+        <button class="category" data-id = @item.Value >
+            <h6 class="my-0">@item.Text</h6>
+        </button>
+        <span class="text-body-secondary">@item.Value</span>
+        </li>
+    }
+    
+</ul>
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-primary">Sort By</span>
+</h4>
+<ul class="list-group list-group-flush">
+    @{
+        int optionOne = (int)SortByEnums.Default;   
+        int optionTwo = (int)SortByEnums.Popularity;   
+        int optionThree = (int)SortByEnums.PriceLowToHigh;   
+        int optionFour = (int)SortByEnums.PriceHighToLow;   
+    }
+    <li class="list-group-item"> 
+        <a class="sort" href="#" id="Newest" sort-id="@optionOne">Newest</a> 
+    </li>
+    <li class="list-group-item">
+        <a class="sort" href="#" id="Newest" sort-id="@optionTwo">Popularity</a> 
+    </li>
+    <li class="list-group-item">
+        <a class="sort" href="#" id="Newest" sort-id="@optionThree">Price : Low to high</a> 
+    </li>
+    <li class="list-group-item">
+        <a class="sort" href="#" id="Newest" sort-id="@optionFour">Price : High to low</a>
+    </li>
+</ul>
+
+<p>  
+         <label for="price">Price range:</label>  
+         <input type="text" id="price" style="border:0; color:red; font-weight:bold;">  
+      </p>  
+      <div id="slider-3"></div> 
+
+<script>
+
+    
+    $(function() {  
+            $( "#slider-3" ).slider({  
+               range:true,  
+               min: 0,  
+               max: 500,  
+               values: [ 50, 300 ],  
+               slide: function( event, ui ) {  
+                  $( "#price" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );  
+               }  
+           });  
+         $( "#price" ).val( "$" + $( "#slider-3" ).slider( "values", 0 ) +  
+            " - $" + $( "#slider-3" ).slider( "values", 1 ) );  
+         });  
+
+    $(".category").click(function(){        
+        $.ajax({
+            url:'/Customer/Shop/GetNewList',
+            data:{
+                categoryId : $(this).attr("data-id")
+            }
+        })
+        .done(function(response){
+        $("#tableContainer").html(response);
+        })
+        .fail(function(XMLHttpRequest, textSearch, errorThrown) {
+            alert("fail")
+        });
+
+    });
+
+    $(".sort").click(function(){     
+        //var val = $(this).attr("sort-id");   
+        $.ajax({
+            url:'/Customer/Shop/GetNewList',
+            data:{
+                sortBy : $(this).attr("sort-id")
+            }
+        })
+        .done(function(response){
+        $("#tableContainer").html(response);
+        })
+        .fail(function(XMLHttpRequest, textSearch, errorThrown) {
+            alert("fail")
+        });
+
+    });
+</script>

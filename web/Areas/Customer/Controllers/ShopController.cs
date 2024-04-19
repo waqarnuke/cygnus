@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Models;
 using Utility.Common;
+using Web.ViewModel;
 
 namespace Web.Area.Customer.Controllers
 {
@@ -20,7 +21,7 @@ namespace Web.Area.Customer.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string search=null)
         {
             var clamidentity = (ClaimsIdentity)User.Identity;
             var claim = clamidentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -30,10 +31,23 @@ namespace Web.Area.Customer.Controllers
                     _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).Count());
             }
 
-            IEnumerable<Product> porductList = _unitOfWork.Product.GetAll(includeProperties:"Category");
-
-            return View(porductList);
+            return View(new ShopVM());
         }
+
+        public IActionResult GetNewList(string search, int? pageNo, int? categoryId,int sortBy)
+        {
+            
+            ShopVM obj = new ShopVM()
+            {
+                search =  search,
+                PageNo = pageNo,
+                CategoryId = categoryId,
+                SortBy = sortBy
+            };
+            return ViewComponent("Shop", obj);
+        }
+
+       
         public IActionResult Details(int productId)
         {
             ShoppingCart cart = new (){
@@ -69,16 +83,10 @@ namespace Web.Area.Customer.Controllers
             }
 
             TempData["success"] = "Cart updated successfully";
-
-          
             
             return Redirect(nameof(Index));
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
+        
     }
 }

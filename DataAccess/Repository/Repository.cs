@@ -60,7 +60,45 @@ namespace DataAccess.Repository
             }
             return query.ToList();
         }
-
+        //Testing for pageer but never used if someone will use please remve this commints 
+        public IEnumerable<T> GetAllWithPager(Expression<Func<T, bool>>? filter, string? includeProperties = null, int? pageNo=null)
+        {
+            int pagesize = 3;
+            IQueryable<T> query = _dbSet;
+            if(filter != null)
+            {
+                query = query.Where(filter);
+            
+            }
+            if(!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach(var includporp in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includporp);
+                }
+            }
+            if(pageNo.HasValue)
+            {
+                query = query.Skip( Convert.ToInt32((pageNo - 1) * pagesize)).Take(pagesize);
+            }
+            return query.ToList();
+        }
+        //Testing for pageer but never used if someone will use please remve this commints 
+        public int GetCount(Expression<Func<T, bool>>? filter)
+        {
+            IQueryable<T> query = _dbSet;
+            if(filter != null)
+            {
+                return query.Where(filter).Count();
+            
+            }
+            else
+            {
+                return  query.Count();
+            }
+            
+        }
         public void Remove(T entity)
         {
            _dbSet.Remove(entity);
@@ -70,5 +108,7 @@ namespace DataAccess.Repository
         {
             _dbSet.RemoveRange(entity);
         }
+
+        
     }
 }
