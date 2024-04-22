@@ -1,0 +1,17 @@
+Id,Title,Description,ISBN,Author,ListPrice,Price,Price50,Price100,CategoryId,ImageUrl
+1,Fortune of Time,"Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.Nunc malesuada viverra ipsum sit amet tincidunt. ",SWD9999001,Billy Spark,99.0,90.0,85.0,80.0,1,fortune of time.jpg
+
+2,Dark Skies,"Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.
+
+Nunc malesuada viverra ipsum sit amet tincidunt. ",CAW777777701,Nancy Hoover,40.0,30.0,25.0,20.0,1,dark skies.jpg
+3,Vanish in the Sunset,"Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.
+
+Nunc malesuada viverra ipsum sit amet tincidunt. ",RITO5555501,Julian Button,55.0,50.0,40.0,35.0,2,vanish in the sunset.jpg
+4,Cotton Candy,"Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.
+
+Nunc malesuada viverra ipsum sit amet tincidunt. ",WS3333333301,Abby Muscles,70.0,65.0,60.0,55.0,2,cotton candy.jpg
+5,Rock in the Ocean,"Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.
+
+Nunc malesuada viverra ipsum sit amet tincidunt. ",SOTJ1111111101,Ron Parker,30.0,27.0,25.0,20.0,3,rock in the ocean back.jpg
+6,Leaves and Wonders,"Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.Nunc malesuada viverra ipsum sit amet tincidunt. ",FOT000000001,Laura Phantom,25.0,23.0,22.0,20.0,3,leaves and wonders.jpg
+

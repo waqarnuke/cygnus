@@ -7,68 +7,71 @@
     
     <button id="nxtBtn" class="pageButton" data-pageNo = @(Model.PageNo + 1 )>Next</button>
 </div> *@
-<div>
+<div class="pb-20 bor-bottom shop-page-wrp d-flex justify-content-between align-items-center mb-65">
+    <div class="input-group w-25">
+            <input id="textSearch" class="form-control boder-0 shadow" type="text" name="Search">
+            <button type="button" id="serchBtn" class="btn btn-secondary">serach</button>
+        </div>
+    <div class="">
     @if(Model.Pager != null)
     {
         if(Model.Pager.CurrentPage > 1)
         {
-            <button  class="pageButton" data-pageNo = "1">First</button>
-            <button  class="pageButton" data-pageNo = "@Model.Pager.CurrentPage - 1" >Privious</button>
+            <button  class="pageButton pagi-btn" data-pageNo = "1">1st</button>
+            <button  class="pageButton pagi-btn" data-pageNo = "@Model.Pager.CurrentPage - 1" > <i class="fa-regular fa-chevron-left"></i> </button>
         }
         
         for(var pageNo = Model.Pager.StartPage; pageNo <= Model.Pager.EndPage; pageNo++)
         {
-            <button  class="pageButton" data-pageNo = "@pageNo" >@pageNo</button>
+            <button  class="pageButton pagi-btn" data-pageNo = "@pageNo" >@pageNo</button>
         }
         
         if(Model.Pager.CurrentPage < Model.Pager.TotalPages)
         {
-            <button  class="pageButton" data-pageNo = "@Model.Pager.CurrentPage + 1" >Next</button>
-            <button  class="pageButton" data-pageNo = "@Model.Pager.EndPage">Last</button>
+            <button  class="pageButton pagi-btn" data-pageNo = "@Model.Pager.CurrentPage + 1"> <i class="fa-regular fa-chevron-right"></i> </button>
+            <button  class="pageButton pagi-btn" data-pageNo = "@Model.Pager.EndPage">Last</button>
         }
         
     }
-    
+    </div>
+    <div class="short">
+                    <select name="shortList" id="shortList" style="display: none;">
+                        <option value="0">Short by popularity</option>
+                        <option value="1">E-Cigarette</option>
+                        <option value="2">POP Extra</option>
+                        <option value="3">Charger Kit</option>
+                        <option value="4">100ml Nic</option>
+                        <option value="5">Salt Juice</option>
+                    </select><div class="nice-select" tabindex="0"><span class="current">Short by popularity</span><ul class="list"><li data-value="0" class="option selected">Short by popularity</li><li data-value="1" class="option">E-Cigarette</li><li data-value="2" class="option">POP Extra</li><li data-value="3" class="option">Charger Kit</li><li data-value="4" class="option">100ml Nic</li><li data-value="5" class="option">Salt Juice</li></ul></div>
+                </div>
 </div>
-<div class="row pb-5">
+
+<div class="row g-4">
     @if(Model.Products != null && Model.Products.Count() > 0)
     {
         @foreach(var item in Model.Products)
         {
-                <div class="col-lg-3 col-sm-6">
-                    <div class="row p-2">
-                        <div class="col-12 p-1">
-                            <div class="card border-0 p-3 shadow border-top border-5 rounded">
-                                <img src="@item.ImageUrl" class="card-img-top rounded" alt="" >
-                                <div class="card-body pb-0">
-                                    <div class="pl-1">
-                                        <p class="card-title h5 text-dark opacity-75 text-upercase text-center">@item.Title</p>
-                                        <p class="card-title text-warning text-center">@item.Author</p>
-                                    </div>
-                                    <div class="pl-1">
-                                        <p class="text-dark opacity-75 text-center mb-0">
-                                            List Price: 
-                                            <span class="text-decoration-line-through">
-                                                @item.ListPrice.ToString("c")
-                                            </span> 
-                                        </p>
-                                    </div>
-                                    <div class="pl-1">
-                                        <p class="text-dark opacity-75 text-center">
-                                            As low as: 
-                                            <span>
-                                                @item.Price100.ToString("c")
-                                            </span> 
-                                        </p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <a asp-action="Details" asp-route-productId="@item.Id" class="btn btn-primary bg-gradient border-0 from-control">
-                                        Details
-                                    </a>
-                                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6">
+                    <div class="product__item bor">
+                        <a href="#0" class="wishlist"><i class="fa-regular fa-heart"></i></a>
+                        <a asp-action="Details" asp-route-productId="@item.Id" class="product__image pt-20 d-block">
+                            <img class="font-image" src="@item.ImageUrl" alt="image">
+                            
+                        </a>
+                        <div class="product__content">
+                            <h4 class="mb-15">
+                                <a class="primary-hover" href="shop-single.html">@item.Title</a>
+                            </h4>
+                            <del>@item.ListPrice.ToString("c")</del><span class="primary-color ml-10">@item.Price100.ToString("c")</span>
+                            <div class="star mt-20">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
                             </div>
                         </div>
+                        <a class="product__cart d-block bor-top" asp-action="Details" asp-route-productId="@item.Id"><i class="fa-regular fa-cart-shopping primary-color me-1"></i> <span>Add to cart</span></a>
                     </div>
                 </div>
         }

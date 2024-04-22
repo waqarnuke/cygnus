@@ -87,6 +87,18 @@ namespace Web.Area.Customer.Controllers
             return Redirect(nameof(Index));
         }
 
+        public IActionResult shoplist(string search=null)
+        {
+            var clamidentity = (ClaimsIdentity)User.Identity;
+            var claim = clamidentity.FindFirst(ClaimTypes.NameIdentifier);
+            if(claim != null )
+            {
+                HttpContext.Session.SetInt32(SD.SessionCart, 
+                    _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).Count());
+            }
+
+            return View(new ShopVM());
+        }
         
     }
 }

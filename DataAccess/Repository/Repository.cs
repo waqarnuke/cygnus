@@ -108,6 +108,14 @@ namespace DataAccess.Repository
         {
             _dbSet.RemoveRange(entity);
         }
+        public IEnumerable<T> AddRange( List<T>? entity = null)
+        {
+            
+
+            _dbSet.AddRange(entity);
+
+            return entity.ToList();
+        }
 
         
     }
