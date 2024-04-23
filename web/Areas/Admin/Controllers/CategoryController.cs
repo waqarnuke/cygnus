@@ -12,10 +12,12 @@ namespace Web.Areas.Admin.Controllers
     [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
+         private readonly IWebHostEnvironment _webHostEnviroment;
         private readonly IUnitOfWork _unitOfWrok;
-        public CategoryController(IUnitOfWork unitOfWrok)
+        public CategoryController(IUnitOfWork unitOfWrok,IWebHostEnvironment webHostEnviroment)
         {
             _unitOfWrok = unitOfWrok;
+            _webHostEnviroment = webHostEnviroment;
         }
         public IActionResult Index()
         {
@@ -24,21 +26,64 @@ namespace Web.Areas.Admin.Controllers
         }
         
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            return View();
+            Category cat = new Category();
+            if(id == null || id == 0)
+            {
+                cat.ImageUrl =  @"\images\placeholder.JPG" ;
+                return View(cat);
+            }
+            else
+            {
+                cat = _unitOfWrok.category.Get(u => u.Id == id);
+                return View(cat);
+            }
+            
         }
 
         [HttpPost]
-        public IActionResult Create(Category category)
+        public IActionResult Upsert(Category category, IFormFile? file)
         {
-            if(category.Name == category.DisplayOrder.ToString())
-            {
-                ModelState.AddModelError("name","The DisplayOrder cannot exactly match the Name."); 
-            }
+            string wwwRootPath = _webHostEnviroment.WebRootPath;
             if(ModelState.IsValid)
             {
-                _unitOfWrok.category.Add(category);
+                if(file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string categoryPath = Path.Combine(wwwRootPath, @"images\category");
+
+                    if(!string.IsNullOrEmpty(category.ImageUrl))
+                    {
+                        string oldImagePath = Path.Combine(wwwRootPath, category.ImageUrl.TrimStart('\\'));
+                        if(System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath); 
+                        }
+                    }
+
+                    using(var fileStream = new FileStream(Path.Combine(categoryPath,fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    category.ImageUrl =  @"\images\category\" + fileName;
+
+                }
+            
+                if(category.Name == category.DisplayOrder.ToString())
+                {
+                    ModelState.AddModelError("name","The DisplayOrder cannot exactly match the Name."); 
+                }
+            
+                if(category.Id == 0)
+                {
+                    _unitOfWrok.category.Add(category);
+                }
+                else
+                {
+                    _unitOfWrok.category.Update(category);
+                }
                 _unitOfWrok.Save();
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");

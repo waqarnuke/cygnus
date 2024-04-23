@@ -103,5 +103,22 @@
 
     });
 
+    $("#serchBtn").click(function(){
+        var searchValue = $("#textSearch").val();
+        
+        $.ajax({
+            url:'/Customer/Shop/GetNewList',
+            data:{
+                search :searchValue
+            }
+        })
+        .done(function(response){
+            $("#tableContainer").html(response);
+        })
+        .fail(function(XMLHttpRequest, textSearch, errorThrown) {
+            alert("fail")
+        });
+
+    });
 
 </script>

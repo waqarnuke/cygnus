@@ -17,7 +17,6 @@ namespace Models
         public string ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
-        [NotMapped]
         public AppUser ApplicationUser { get; set; }
         [NotMapped]
         public double Price { get; set; }

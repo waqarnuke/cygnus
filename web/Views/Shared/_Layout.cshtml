@@ -28,9 +28,9 @@
     <link rel="stylesheet" href="~/assets/css/nice-select.css">
     <!-- Style css -->
     <link rel="stylesheet" href="~/assets/css/style.css">
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!-- Jquery 3. 7. 1 Min Js -->
-    <script src="~/assets/js/jquery-3.7.1.min.js"></script>
+    
 </head>
 <body>
     <!-- Header area start here -->
@@ -45,6 +45,8 @@
                     <button><i class="fa-solid fa-search"></i></button>
                 </div>
                 <div class="account__wrap">
+                    <!-- Account div -->
+                    <!-- 
                     <div class="account d-flex align-items-center">
                         <div class="user__icon">
                             <a href="#0">
@@ -57,6 +59,7 @@
                             </span>
                         </a>
                     </div>
+                     -->
                     <div class="cart d-flex align-items-center">
                         <span class="cart__icon">
                             <i class="fa-regular fa-cart-shopping"></i>
@@ -97,76 +100,32 @@
                         <a href="about.html">About Us</a>
                     </li>
                     <li>
+                        <a asp-area="Customer" asp-controller="Home" asp-action="Privacy">Contact Us</a>
+                    </li>
+                    <li>
                         @if(User.IsInRole(SD.Role_Admin))
                         {
                             <a href="#0">Admin <i class="fa-regular fa-angle-down"></i></a>
                             <ul class="sub-menu">
                                 <li class="subtwohober">
-                                    <a href="shop-2.html">
-                                        Shop Rightbar
-                                    </a>
+                                    <a  asp-area="Admin"asp-controller="Category" asp-action="Index">Category</a>
                                 </li>
                                 <li class="subtwohober">
-                                    <a href="shop-single.html">
-                                        Shop Single
-                                    </a>
+                                    <a asp-area="Admin"asp-controller="Product" asp-action="Index">Product</a>
+                                    
                                 </li>
                                 <li class="subtwohober">
-                                    <a href="cart.html">
-                                        Cart Page
-                                    </a>
+                                    <a asp-area="Admin"asp-controller="Company" asp-action="Index">Company</a>
+                                    
                                 </li>
                                 <li class="subtwohober">
-                                    <a href="checkout.html">
-                                        Checkout Page
-                                    </a>
+                                    <a asp-area="Admin"asp-controller="Order" asp-action="Index">Manager Order</a>
                                 </li>
                                 <li class="subtwohober">
-                                    <a href="register.html">
-                                        Register
-                                    </a>
-                                </li>
-                                <li class="subtwohober">
-                                    <a href="login.html">
-                                        Login
-                                    </a>
-                                </li>
-                                <li class="subtwohober">
-                                    <a href="error.html">
-                                        404 Error
-                                    </a>
+                                    <a class="dropdown-item" asp-area="Identity" asp-controller="Account" asp-action="Register">Create User</a>
                                 </li>
                             </ul>
                         }
-                       
-                    </li>
-                    <li>
-                        <a href="#0">Blog <i class="fa-regular fa-angle-down"></i></a>
-                        <ul class="sub-menu">
-                            <li class="subtwohober">
-                                <a href="blog.html">
-                                    Blog Stander
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="blog-grid.html">
-                                    Blog Grid
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="blog-list.html">
-                                    Blog List
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="blog-single.html">
-                                    Blog Single
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a asp-area="Customer" asp-controller="Home" asp-action="Privacy">Contact Us</a>
                     </li>
                     @if(_signInManager.IsSignedIn(User))
                     {
@@ -239,7 +198,7 @@
     </main>
 
     <!-- Footer area start here -->
-    <footer class="footer-area black-area bg-image" data-background="~/assets/images/footer/footer-bg.jpg">
+    <footer class="footer-area black-area bg-image" data-background="assets/images/footer/footer-bg.jpg">
         <div class="container">
             <div class="footer__wrp pt-65 pb-65 bor-top bor-bottom">
                 <div class="row g-4">

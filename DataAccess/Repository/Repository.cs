@@ -1,3 +1,4 @@
+using DataAccess.Data;
 using DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -5,9 +6,10 @@ namespace DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
+        private readonly AppIdentityDbContext _context;
         private DbSet<T> _dbSet;
-        public Repository(ApplicationDbContext context)
+        public Repository(AppIdentityDbContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();

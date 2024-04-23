@@ -1,3 +1,4 @@
+using DataAccess.Data;
 using DataAccess.Repository.IRepository;
 using Models;
 
@@ -5,8 +6,8 @@ namespace DataAccess.Repository
 {
     public class CompanyRepository : Repository<Company>, ICompanyRepository
     {
-        private readonly ApplicationDbContext _context;
-        public CompanyRepository(ApplicationDbContext context) : base(context)
+        private readonly AppIdentityDbContext _context;
+        public CompanyRepository(AppIdentityDbContext context) : base(context)
         {
             _context = context;
         }

@@ -18,12 +18,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentityServices(builder.Configuration);
+// builder.Services.AddDbContext<ApplicationDbContext>(
+//     options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
-builder.Services.AddIdentityServices(builder.Configuration);
+
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(option => {
@@ -63,7 +64,7 @@ app.MapControllerRoute(
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
-var context = services.GetRequiredService<ApplicationDbContext>();
+//var context = services.GetRequiredService<ApplicationDbContext>();
 
 var identityContext = services.GetRequiredService<AppIdentityDbContext>();
 var userManager = services.GetRequiredService<UserManager<AppUser>>();
@@ -72,7 +73,7 @@ var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 var logger = services.GetRequiredService<ILogger<Program>>();
 try
 {
-    await context.Database.MigrateAsync();
+    //await context.Database.MigrateAsync();
     await identityContext.Database.MigrateAsync();
     await AppIdentityDbContextSeed.SeedUsersAsync(userManager,roleManager);
 }

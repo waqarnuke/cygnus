@@ -14,12 +14,12 @@ namespace Web.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDbContext<AppIdentityDbContext>(opt => {
-                opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+            services.AddDbContext<AppIdentityDbContext>(option => {
+                option.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddIdentity<AppUser,IdentityRole>(opt =>{
-                opt.Password.RequiredLength = 8;
+            services.AddIdentity<AppUser,IdentityRole>(option =>{
+                option.Password.RequiredLength = 8;
             })
             .AddEntityFrameworkStores<AppIdentityDbContext>()
             .AddTokenProvider<DataProtectorTokenProvider<AppUser>>(TokenOptions.DefaultProvider)

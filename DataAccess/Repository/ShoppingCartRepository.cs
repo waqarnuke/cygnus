@@ -1,3 +1,4 @@
+using DataAccess.Data;
 using DataAccess.Repository.IRepository;
 using Models;
 
@@ -5,8 +6,8 @@ namespace DataAccess.Repository
 {
     public class ShoppingCartRepository : Repository<ShoppingCart>, IShoppingCartRepository
     {
-        private readonly ApplicationDbContext _context;
-        public ShoppingCartRepository(ApplicationDbContext context) : base(context)
+        private readonly AppIdentityDbContext _context;
+        public ShoppingCartRepository(AppIdentityDbContext context) : base(context)
         {
             _context = context;
         }
