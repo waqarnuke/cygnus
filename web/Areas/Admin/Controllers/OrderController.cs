@@ -164,8 +164,8 @@ namespace Web.Areas.Admin.Controllers
         {
             OrderHeader orderHeader = _unitOfWork .OrderHeader.Get(u => u.Id == orderHeaderId);
             if(orderHeader.PaymentStatus == SD.PaymentStatusDelayedPayment){
+                
                 //this is an ordeer by company
-
                 var service  = new Stripe.Checkout.SessionService();
                 Stripe.Checkout.Session session = service.Get(orderHeader.SessionId);
                 if(session.PaymentStatus.ToLower() == "paid"){

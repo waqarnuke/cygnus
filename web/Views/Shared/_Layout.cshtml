@@ -94,45 +94,41 @@
                         <a asp-area="Customer" asp-controller="Shop" asp-action="Index">Shop</i></a>
                     </li>
                     <li>
-                        <a asp-area="Customer" asp-controller="Shop" asp-action="shoplist">shoplist</i></a>
-                    </li>
-                    <li>
                         <a href="about.html">About Us</a>
                     </li>
                     <li>
                         <a asp-area="Customer" asp-controller="Home" asp-action="Privacy">Contact Us</a>
                     </li>
-                    <li>
-                        @if(User.IsInRole(SD.Role_Admin))
-                        {
-                            <a href="#0">Admin <i class="fa-regular fa-angle-down"></i></a>
-                            <ul class="sub-menu">
-                                <li class="subtwohober">
-                                    <a  asp-area="Admin"asp-controller="Category" asp-action="Index">Category</a>
-                                </li>
-                                <li class="subtwohober">
-                                    <a asp-area="Admin"asp-controller="Product" asp-action="Index">Product</a>
-                                    
-                                </li>
-                                <li class="subtwohober">
-                                    <a asp-area="Admin"asp-controller="Company" asp-action="Index">Company</a>
-                                    
-                                </li>
-                                <li class="subtwohober">
-                                    <a asp-area="Admin"asp-controller="Order" asp-action="Index">Manager Order</a>
-                                </li>
-                                <li class="subtwohober">
-                                    <a class="dropdown-item" asp-area="Identity" asp-controller="Account" asp-action="Register">Create User</a>
-                                </li>
-                            </ul>
-                        }
-                    </li>
+                    @if(User.IsInRole(SD.Role_Admin))
+                    {<li>
+                        <a href="#0">Admin <i class="fa-regular fa-angle-down"></i></a>
+                        <ul class="sub-menu">
+                            <li class="subtwohober">
+                                <a  asp-area="Admin"asp-controller="Category" asp-action="Index">Category</a>
+                            </li>
+                            <li class="subtwohober">
+                                <a asp-area="Admin"asp-controller="Product" asp-action="Index">Product</a>
+                                
+                            </li>
+                            <li class="subtwohober">
+                                <a asp-area="Admin"asp-controller="Company" asp-action="Index">Company</a>
+                                
+                            </li>
+                            <li class="subtwohober">
+                                <a class="dropdown-item" asp-area="Identity" asp-controller="Account" asp-action="Register">Create User</a>
+                            </li>
+                        </ul>
+                    </li>   
+                    }
                     @if(_signInManager.IsSignedIn(User))
                     {
                         <li>
                             <a asp-area="Customer" asp-controller="Cart" asp-action="Index">
                                 cart
                             </a>
+                        </li>
+                        <li class="subtwohober">
+                                    <a asp-area="Admin"asp-controller="Order" asp-action="Index">Manager Order</a>
                         </li>
                     }
                     

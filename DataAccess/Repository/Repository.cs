@@ -6,7 +6,6 @@ namespace DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        //private readonly ApplicationDbContext _context;
         private readonly AppIdentityDbContext _context;
         private DbSet<T> _dbSet;
         public Repository(AppIdentityDbContext context)

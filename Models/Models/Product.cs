@@ -36,6 +36,7 @@ namespace Models
         [Display(Name = "Price for 100+")]
         [Range(1,1000)]
         public double Price100 { get; set; }
+        [Required]
         public int CategoryId { get; set; }
         
         [ForeignKey("CategoryId")]
@@ -44,5 +45,14 @@ namespace Models
         
         [ValidateNever]
         public string ImageUrl { get; set; }
+        public string Barcode { get; set; }
+        public int? BrandId { get; set; }
+        [ValidateNever]
+        public Brand? Brands { get; set; }
+        public int? SubCategoryId { get; set; }
+        [ValidateNever]
+        public SubCategory? SubCategory { get; set; }
+        
+        
     }
 }

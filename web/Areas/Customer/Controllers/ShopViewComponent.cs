@@ -29,13 +29,11 @@ namespace Web.Controllers
                 if(shopvmObj.CategoryId.HasValue)
                 {
                     shopVM.Products = shopVM.Products.Where(x => x.CategoryId == shopvmObj.CategoryId.Value).ToList();
-                // shopVM.Products = _unitOfWork.Product.GetAllWithPageSize(shopVM.PageNo.Value, u => u.CategoryId == shopvmObj.CategoryId.Value ,includeProperties:"Category").ToList();
                 }
 
                 if(!string.IsNullOrEmpty( shopvmObj.search))
                 {
                     shopVM.Products = shopVM.Products.Where(u => u.Title.Contains(shopvmObj.search)).ToList();
-                    //shopVM.Products = _unitOfWork.Product.GetAllWithPageSize(shopVM.PageNo.Value, u => u.Title.Contains(shopvmObj.search),includeProperties:"Category").ToList();
                 }
                 if(shopvmObj.MinimubPrice.HasValue)
                 {
@@ -62,18 +60,15 @@ namespace Web.Controllers
                             shopVM.Products = shopVM.Products.OrderByDescending(u => u.Id).ToList();
                             break;
                     }
-                    //products = products.Where(u => u.Price <= shopvmObj.MaximumPrice.Value).ToList();
                 }
             
-            totalRecords = shopVM.Products.Count();
-            shopVM.Products =  shopVM.Products.Skip( Convert.ToInt32((shopVM.PageNo - 1) * 5)).Take(5).ToList();
+                totalRecords = shopVM.Products.Count();
+                shopVM.Products =  shopVM.Products.Skip( Convert.ToInt32((shopVM.PageNo - 1) * 5)).Take(5).ToList();
 
-            shopVM.Pager = new Pager(totalRecords,shopVM.PageNo.Value,5);
+                shopVM.Pager = new Pager(totalRecords,shopVM.PageNo.Value,5);
 
-
-            shopVM.SortBy = shopvmObj.SortBy;
-           }
-           
+                shopVM.SortBy = shopvmObj.SortBy;
+            }
             return View(shopVM);
         }
 

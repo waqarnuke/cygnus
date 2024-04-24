@@ -15,6 +15,8 @@ namespace DataAccess.Repository
         public IAppUserRepository AppUser{get; private set;}
         public IOrderDetailRepository OrderDetail {get; private set;}
         public IOrderHeaderRepository OrderHeader {get; private set;}
+        public IBrandRepository Brand {get; private set;}
+        public ISubCategoryRepository SubCategory {get; private set;}
         public UnitOfWork(AppIdentityDbContext context)
         {
             _context = context;
@@ -26,6 +28,8 @@ namespace DataAccess.Repository
             AppUser = new AppUserRepository(context);
             OrderDetail = new OrderDetailRepository(_context);
             OrderHeader = new OrderHeaderRepository(_context);
+            Brand = new BrandRepository(_context);
+            SubCategory = new SubCategoryRepository(_context);
         }
         
         public void Save()

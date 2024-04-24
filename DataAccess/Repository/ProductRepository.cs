@@ -32,7 +32,6 @@ namespace DataAccess.Repository
                     objFormDb.ImageUrl = obj.ImageUrl;
                 }
             }
-             //_context.Products.Update(obj);
         }
     }
 }

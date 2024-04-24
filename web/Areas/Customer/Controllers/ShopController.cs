@@ -2,7 +2,6 @@ using System.Security.Claims;
 using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using Models;
 using Utility.Common;
 using Web.ViewModel;
@@ -47,7 +46,6 @@ namespace Web.Area.Customer.Controllers
             return ViewComponent("Shop", obj);
         }
 
-       
         public IActionResult Details(int productId)
         {
             ShoppingCart cart = new (){
@@ -75,7 +73,7 @@ namespace Web.Area.Customer.Controllers
                 _unitOfWork.Save();
             }
             else
-            { //add cart record
+            {
                 _unitOfWork.ShoppingCart.Add(cart);
                 _unitOfWork.Save();
                 HttpContext.Session.SetInt32(SD.SessionCart, 
@@ -87,18 +85,6 @@ namespace Web.Area.Customer.Controllers
             return Redirect(nameof(Index));
         }
 
-        public IActionResult shoplist(string search=null)
-        {
-            var clamidentity = (ClaimsIdentity)User.Identity;
-            var claim = clamidentity.FindFirst(ClaimTypes.NameIdentifier);
-            if(claim != null )
-            {
-                HttpContext.Session.SetInt32(SD.SessionCart, 
-                    _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).Count());
-            }
-
-            return View(new ShopVM());
-        }
         
     }
 }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations.cygnus
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20240423024511_initialIdentity")]
-    partial class initialIdentity
+    [Migration("20240423054152_addcolke")]
+    partial class addcolke
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -146,6 +146,42 @@ namespace DataAccess.Migrations.cygnus
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Models.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Action"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "SciFi"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "History"
+                        });
                 });
 
             modelBuilder.Entity("Models.Category", b =>
@@ -468,6 +504,12 @@ namespace DataAccess.Migrations.cygnus
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Barcode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("BrandId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
@@ -494,13 +536,20 @@ namespace DataAccess.Migrations.cygnus
                     b.Property<double>("Price50")
                         .HasColumnType("REAL");
 
+                    b.Property<int?>("SubCategoryId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BrandId");
+
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("SubCategoryId");
 
                     b.ToTable("Products");
 
@@ -615,6 +664,39 @@ namespace DataAccess.Migrations.cygnus
                     b.ToTable("ShoppingCarts");
                 });
 
+            modelBuilder.Entity("Models.SubCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Action"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "SciFi"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "History"
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -707,13 +789,25 @@ namespace DataAccess.Migrations.cygnus
 
             modelBuilder.Entity("Models.Product", b =>
                 {
+                    b.HasOne("Models.Brand", "Brands")
+                        .WithMany()
+                        .HasForeignKey("BrandId");
+
                     b.HasOne("Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Models.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId");
+
+                    b.Navigation("Brands");
+
                     b.Navigation("Category");
+
+                    b.Navigation("SubCategory");
                 });
 
             modelBuilder.Entity("Models.ShoppingCart", b =>

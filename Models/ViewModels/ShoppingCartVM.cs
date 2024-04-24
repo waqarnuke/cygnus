@@ -1,5 +1,3 @@
-using Models;
-
 namespace Models.ViewModels
 {
     public class ShoppingCartVM

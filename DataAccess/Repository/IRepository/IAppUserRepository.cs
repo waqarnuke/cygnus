@@ -1,4 +1,3 @@
-using Models;
 using Models.Identity;
 
 namespace DataAccess.Repository.IRepository

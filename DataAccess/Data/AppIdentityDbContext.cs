@@ -19,11 +19,25 @@ namespace DataAccess.Data
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        //public DbSet<AppUser> AspNetUsers { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<AppUser> AspNetUsers { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<SubCategory>().HasData(
+                new SubCategory {Id=1 , Name="Action"},
+                new SubCategory {Id=2 , Name="SciFi"},
+                new SubCategory {Id=3 , Name="History"}
+            );
+
+            modelBuilder.Entity<Brand>().HasData(
+                new Brand {Id=1 , Name="Action"},
+                new Brand {Id=2 , Name="SciFi"},
+                new Brand {Id=3 , Name="History"}
+            );
 
             modelBuilder.Entity<Category>().HasData(
                 new Category {Id=1 , Name="Action", DisplayOrder=1},

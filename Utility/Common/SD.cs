@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Utility.Common
 {
     public static class SD
@@ -26,10 +21,8 @@ namespace Utility.Common
         public const string PaymentStatusApproved = "Approved";
         public const string PaymentStatusDelayedPayment = "ApprovedForDelayedPayment";
         public const string PaymenttatusRejected = "Rejected";
-
-
+        
         //Session cart
-
         public const string SessionCart = "SessionShoppingCart";
         
 

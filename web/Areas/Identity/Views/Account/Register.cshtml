@@ -58,6 +58,7 @@
                             <select style="display: none;"  asp-for="CompanyRole" class="form-select" asp-items="@Model.CompanyList">
                                 <option disabled selected>-Select Company-</option>
                             </select>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
                         }
                         <div class="col-12">

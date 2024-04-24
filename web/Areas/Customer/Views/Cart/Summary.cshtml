@@ -8,30 +8,16 @@
 				<div class="checkout__item-left sub-bg">
 					<a asp-action="index" class="btn btn-outline-danger btn-sm mb-20">Back to Cart</a>
 		
-					<h3 class="mb-40">Billing Details</h3>
-					<div class="radio-btn">
-						<span></span>
-						<a class="ml-10 fw-bold" href="register.html">Create An Account?</a>
-					</div>
-					<div class="radio-btn mt-2 mb-30">
-						<span class="opacity-75"></span>
-						<p>Ship To A Different Address?</p>
-					</div>
-					<!-- Nanme Start -->
+					<h3 class="mb-40">Shiping Details</h3>
+					
 					<label class="mb-10" for="name">Your Name *</label>
 					<input class="mb-20" asp-for="OrderHeader.Name" />
 					<span asp-validation-for="OrderHeader.Name" class="text-danger"></span>
-					<!-- Nanme End -->
 
 					<label class="mb-10" for="phone">Phone *</label>
 					<input class="mb-20" asp-for="OrderHeader.PhoneNumber"  />
 					<span asp-validation-for="OrderHeader.PhoneNumber"></span>
 					
-					
-					@* <label class="mb-10" for="email">Email Address *</label>
-					<input class="mb-20" id="email" type="email"> *@
-					@* <label class="mb-10" for="companyName">Company Name (Optional)</label>
-					<input class="mb-20" id="companyName" type="text"> *@
 					<label class="mb-10" for="streetAddress">Street Address *</label>
 					<input asp-for="OrderHeader.StreetAddress" placeholder="1837 E Homer M Adams Pkwy" class="mb-20" />
 					<span asp-validation-for="OrderHeader.StreetAddress" class="text-danger"></span>
@@ -48,8 +34,6 @@
 					<input asp-for="OrderHeader.PostalCode"  class="mb-20"  />
 					<span asp-validation-for="OrderHeader.PostalCode" class="text-danger"></span>
 					
-					@* <label class="mb-10" for="phone">Order Notes (Optional)</label>
-					<textarea placeholder="Note About Your Order . . ." name="notes" id="notes"></textarea> *@
 					<p style="color:maroon; font-size:14px;">Estimate Arrival Date:
 					@DateTime.Now.AddDays(7).ToShortDateString() - @DateTime.Now.AddDays(14).ToShortDateString()
 				</p>
@@ -59,6 +43,14 @@
 		
 		<div class="col-lg-4">
 			<div class="checkout__item-right sub-bg">
+				<div class="btn-disabled radio-btn mt-2">
+					<span></span>
+					<a class="ml-10 fw-bold disabled text-decoration-line-through" href="#0" >Use Bank Card Payments</a>
+				</div>
+				<div class="radio-btn mt-2 pb-30 bor-bottom">
+					<span class="opacity-75"></span>
+					<p>Cash On Delivery</p>
+				</div>
 				<h3 class="mb-40">Your Order</h3>
 				<ul>
 					<li class="bor-bottom pb-4 mb-10">
@@ -86,18 +78,7 @@
 					<span>2801 Lafayette Blvd, Norfolk, Vermont <br>
 						23509, united state</span>
 				</div>
-				<div class="radio-btn mt-30">
-					<span class="opacity-75"></span>
-					<p>Direct Bank Transfer</p>
-				</div>
-				<div class="radio-btn mt-2">
-					<span></span>
-					<a class="ml-10 fw-bold" href="#0">Check Payments</a>
-				</div>
-				<div class="radio-btn mt-2 pb-30 bor-bottom">
-					<span class="opacity-75"></span>
-					<p>Cash On Delivery</p>
-				</div>
+				
 				<p class="pt-30 bor-top">Your personal data will be used to process
 					your order, support your experience
 					throughout this website.</p>

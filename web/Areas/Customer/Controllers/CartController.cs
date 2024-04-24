@@ -8,11 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Models.Identity;
 using Utility.Common;
 using Microsoft.AspNetCore.Identity.UI.Services;
-
-
-
 namespace Web.Areas.Customer.Controllers;
-
 
 [Area("Customer")]
 [Authorize]
@@ -61,7 +57,7 @@ public class CartController : Controller
         } ;
         
         var user = _unitOfwork.AppUser.Get(u => u.Id == userId,includeProperties:"Address");
-        shoppingCartVM.OrderHeader.ApplicationUser = user ;// _unitOfwork.AppUser.Get(u => u.Id == userId,includeProperties:"Address");
+        shoppingCartVM.OrderHeader.ApplicationUser = user ;
         shoppingCartVM.OrderHeader.Name = user.DisplayName;
         shoppingCartVM.OrderHeader.PhoneNumber = user.PhoneNumber;
         if(user.Address !=  null)
@@ -140,7 +136,7 @@ public class CartController : Controller
             var domain = "http://localhost:5282/";
             var options = new Stripe.Checkout.SessionCreateOptions
             {
-                SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}", //"https://example.com/success",
+                SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
                 CancelUrl = domain + $"customer/cart/index",
                 LineItems = new List<Stripe.Checkout.SessionLineItemOptions>(),
                 Mode = "payment",
@@ -181,7 +177,6 @@ public class CartController : Controller
         if(orderHeader.PaymentStatus != SD.PaymentStatusDelayedPayment)
         {
             //this is an ordeer by customer
-
             var service  = new Stripe.Checkout.SessionService();
             Stripe.Checkout.Session session = service.Get(orderHeader.SessionId);
             if(session.PaymentStatus.ToLower() == "paid"){

@@ -37,6 +37,14 @@ namespace Web.Areas.Admin.Controllers
                     Text = u.Name,
                     Value=u.Id.ToString()
                 }),
+                BrandList = _unitOfWrok.Brand.GetAll().Select(u => new SelectListItem {
+                    Text = u.Name,
+                    Value=u.Id.ToString()
+                }),
+                SubCategoryList = _unitOfWrok.SubCategory.GetAll().Select(u => new SelectListItem {
+                    Text = u.Name,
+                    Value=u.Id.ToString()
+                }),
                 Product = new Product()
             };
             if(id ==null || id == 0)
@@ -90,7 +98,7 @@ namespace Web.Areas.Admin.Controllers
                     _unitOfWrok.Product.Update(productVM.Product);
                 }
                 _unitOfWrok.Save();
-                TempData["success"] = "Category created successfully";
+                TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
             }
             else{
@@ -101,33 +109,6 @@ namespace Web.Areas.Admin.Controllers
                 });
                 return View(productVM);
             }
-        }
-        [HttpGet]
-        public IActionResult Edit(int? id)
-        {
-            if(id==null || id == 0)
-            {
-                return NotFound();
-            }
-            Product? product = _unitOfWrok.Product.Get(u => u.Id == id);
-            if(product == null)
-            {
-                return NotFound();
-            } 
-            return View(product);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product product)
-        {
-            if(ModelState.IsValid)
-            {
-                _unitOfWrok.Product.Update(product);
-                _unitOfWrok.Save();
-                TempData["success"] = "Category update successfully";
-                return RedirectToAction("Index");
-            }
-            return View();
         }
         
          [HttpGet]
@@ -152,7 +133,6 @@ namespace Web.Areas.Admin.Controllers
                         file.CopyTo(fileStream);
                     }
 
-                    //Path.Combine(productPath,fileName
                     string csvFilePath = Path.Combine(wwwRootPath, @"productFile\") + fileName;
                     try
                     {
@@ -205,11 +185,10 @@ namespace Web.Areas.Admin.Controllers
                                             product.Price50 = Convert.ToDouble(cellValue);
                                             break;
                                         case "Price100":
-                                           product.Price100 = Convert.ToDouble(cellValue);
+                                            product.Price100 = Convert.ToDouble(cellValue);
                                             break;                    
-                                        // Add more cases for additional properties
                                         default:
-                                            // Handle unknown column header
+                                            
                                             break;
                                     }
                                     
@@ -232,16 +211,7 @@ namespace Web.Areas.Admin.Controllers
                     }
                     
                 }
-                // if(productVM.Product.Id == 0)
-                // {
-                //     _unitOfWrok.Product.Add(productVM.Product);
-                // }
-                // else
-                // {
-                //     _unitOfWrok.Product.Update(productVM.Product);
-                // }
-                // _unitOfWrok.Save();
-                // TempData["success"] = "Category created successfully";
+                
                 return RedirectToAction("Index");
             }
             else{

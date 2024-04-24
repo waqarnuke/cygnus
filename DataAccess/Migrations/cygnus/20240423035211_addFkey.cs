@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations.cygnus
 {
     /// <inheritdoc />
-    public partial class initialIdentity : Migration
+    public partial class addFkey : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -55,6 +55,20 @@ namespace DataAccess.Migrations.cygnus
                 });
 
             migrationBuilder.CreateTable(
+                name: "Brands",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Brands", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -85,6 +99,19 @@ namespace DataAccess.Migrations.cygnus
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Company", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SubCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -268,7 +295,8 @@ namespace DataAccess.Migrations.cygnus
                     Price50 = table.Column<double>(type: "REAL", nullable: false),
                     Price100 = table.Column<double>(type: "REAL", nullable: false),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true)
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    Barcode = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -336,6 +364,16 @@ namespace DataAccess.Migrations.cygnus
                 });
 
             migrationBuilder.InsertData(
+                table: "Brands",
+                columns: new[] { "Id", "ImageUrl", "Name" },
+                values: new object[,]
+                {
+                    { 1, null, "Action" },
+                    { 2, null, "SciFi" },
+                    { 3, null, "History" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "DisplayOrder", "ImageUrl", "Name" },
                 values: new object[,]
@@ -356,16 +394,26 @@ namespace DataAccess.Migrations.cygnus
                 });
 
             migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "Author", "CategoryId", "Description", "ISBN", "ImageUrl", "ListPrice", "Price", "Price100", "Price50", "Title" },
+                table: "SubCategories",
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Billy Spark", 1, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "SWD9999001", "\\images\\product\\fortune of time.jpg", 99.0, 90.0, 80.0, 85.0, "Fortune of Time" },
-                    { 2, "Nancy Hoover", 1, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "CAW777777701", "\\images\\product\\dark skies.jpg", 40.0, 30.0, 20.0, 25.0, "Dark Skies" },
-                    { 3, "Julian Button", 2, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "RITO5555501", "\\images\\product\\vanish in the sunset.jpg", 55.0, 50.0, 35.0, 40.0, "Vanish in the Sunset" },
-                    { 4, "Abby Muscles", 2, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "WS3333333301", "\\images\\product\\cotton candy.jpg", 70.0, 65.0, 55.0, 60.0, "Cotton Candy" },
-                    { 5, "Ron Parker", 3, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "SOTJ1111111101", "\\images\\product\\rock in the ocean back.jpg", 30.0, 27.0, 20.0, 25.0, "Rock in the Ocean" },
-                    { 6, "Laura Phantom", 3, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "FOT000000001", "\\images\\product\\leaves and wonders.jpg", 25.0, 23.0, 20.0, 22.0, "Leaves and Wonders" }
+                    { 1, "Action" },
+                    { 2, "SciFi" },
+                    { 3, "History" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "Author", "Barcode", "CategoryId", "Description", "ISBN", "ImageUrl", "ListPrice", "Price", "Price100", "Price50", "Title" },
+                values: new object[,]
+                {
+                    { 1, "Billy Spark", null, 1, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "SWD9999001", "\\images\\product\\fortune of time.jpg", 99.0, 90.0, 80.0, 85.0, "Fortune of Time" },
+                    { 2, "Nancy Hoover", null, 1, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "CAW777777701", "\\images\\product\\dark skies.jpg", 40.0, 30.0, 20.0, 25.0, "Dark Skies" },
+                    { 3, "Julian Button", null, 2, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "RITO5555501", "\\images\\product\\vanish in the sunset.jpg", 55.0, 50.0, 35.0, 40.0, "Vanish in the Sunset" },
+                    { 4, "Abby Muscles", null, 2, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "WS3333333301", "\\images\\product\\cotton candy.jpg", 70.0, 65.0, 55.0, 60.0, "Cotton Candy" },
+                    { 5, "Ron Parker", null, 3, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "SOTJ1111111101", "\\images\\product\\rock in the ocean back.jpg", 30.0, 27.0, 20.0, 25.0, "Rock in the Ocean" },
+                    { 6, "Laura Phantom", null, 3, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "FOT000000001", "\\images\\product\\leaves and wonders.jpg", 25.0, 23.0, 20.0, 22.0, "Leaves and Wonders" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -464,6 +512,9 @@ namespace DataAccess.Migrations.cygnus
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Brands");
+
+            migrationBuilder.DropTable(
                 name: "Company");
 
             migrationBuilder.DropTable(
@@ -471,6 +522,9 @@ namespace DataAccess.Migrations.cygnus
 
             migrationBuilder.DropTable(
                 name: "ShoppingCarts");
+
+            migrationBuilder.DropTable(
+                name: "SubCategories");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

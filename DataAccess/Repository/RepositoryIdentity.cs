@@ -63,7 +63,7 @@ namespace DataAccess.Repository
 
         public void Remove(T entity)
         {
-           _dbSet.Remove(entity);
+            _dbSet.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<T> entity)

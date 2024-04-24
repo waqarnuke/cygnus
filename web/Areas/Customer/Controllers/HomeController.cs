@@ -1,10 +1,8 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Models;
 using System.Security.Claims;
 using DataAccess.Repository.IRepository;
 using Utility.Common;
-
+using Models.ViewModels;
 namespace Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
@@ -32,17 +30,18 @@ public class HomeController : Controller
             }
         }
         
-        return View();
+        HomeVM model = new()
+        {
+            Products = _unitOfWork.Product.GetAll(),
+            Categories = _unitOfWork.category.GetAll(),
+            Brands = _unitOfWork.Brand.GetAll()
+        };
+
+        return View(model);
     }
 
     public IActionResult Privacy()
     {
         return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

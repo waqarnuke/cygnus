@@ -1,11 +1,6 @@
 ﻿@model IEnumerable<SelectListItem>
 @using Utility.Common
 
-@* <div class="row pb-5">
-    <select asp-items="Model.ToList()" class="form-select boder-0 shadow">
-        <option disabled selected>--Select Category</option>
-    </select>
-</div> *@
 <div class="product__left-item sub-bg">
  <h4 class="mb-30 left-title">
     <span class="text-primary">Category</span>
@@ -45,7 +40,6 @@
         <a class="sort" href="#" id="Newest" sort-id="@optionFour">Price : High to low</a>
     </li>
 </ul>
-  
 </div>
 
 
@@ -68,7 +62,6 @@
     });
 
     $(".sort").click(function(){     
-        //var val = $(this).attr("sort-id");   
         $.ajax({
             url:'/Customer/Shop/GetNewList',
             data:{

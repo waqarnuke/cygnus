@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
@@ -14,6 +9,8 @@ namespace DataAccess.Repository.IRepository
         IAppUserRepository AppUser {get;}
         IOrderDetailRepository OrderDetail {get;}
         IOrderHeaderRepository OrderHeader {get;}
+        IBrandRepository Brand {get;}
+        ISubCategoryRepository SubCategory {get;}
         void Save();
     }
 }

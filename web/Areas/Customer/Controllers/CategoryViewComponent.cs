@@ -1,7 +1,6 @@
 using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Models;
 
 namespace Web.Controllers
 {
@@ -12,7 +11,6 @@ namespace Web.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-
         public async Task<IViewComponentResult> InvokeAsync()
         {
             IEnumerable<SelectListItem> categorytList = _unitOfWork.category.GetAll().Select(u => new SelectListItem

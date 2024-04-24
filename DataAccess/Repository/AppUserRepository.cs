@@ -1,6 +1,5 @@
 using DataAccess.Data;
 using DataAccess.Repository.IRepository;
-using Models;
 using Models.Identity;
 
 namespace DataAccess.Repository

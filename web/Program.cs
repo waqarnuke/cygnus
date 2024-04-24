@@ -1,4 +1,3 @@
-using DataAccess;
 using DataAccess.Data;
 using DataAccess.Identity;
 using DataAccess.Repository;
@@ -10,21 +9,14 @@ using Stripe;
 using Utility;
 using Web.Extensions;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Configuration;
-using SendGrid.Helpers.Mail;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddIdentityServices(builder.Configuration);
-// builder.Services.AddDbContext<ApplicationDbContext>(
-//     options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
-
-
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(option => {
@@ -39,7 +31,6 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -64,7 +55,6 @@ app.MapControllerRoute(
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
-//var context = services.GetRequiredService<ApplicationDbContext>();
 
 var identityContext = services.GetRequiredService<AppIdentityDbContext>();
 var userManager = services.GetRequiredService<UserManager<AppUser>>();
@@ -73,7 +63,6 @@ var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 var logger = services.GetRequiredService<ILogger<Program>>();
 try
 {
-    //await context.Database.MigrateAsync();
     await identityContext.Database.MigrateAsync();
     await AppIdentityDbContextSeed.SeedUsersAsync(userManager,roleManager);
 }
