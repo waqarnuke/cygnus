@@ -1,5 +1,7 @@
 using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Utility.Common;
 using Web.ViewModel;
 
 namespace Web.Controllers
@@ -18,19 +20,24 @@ namespace Web.Controllers
 
             ShopVM shopVM = new ShopVM();
             
+            shopVM.SortByList = ToSelectItems;
+            
             shopVM.PageNo = shopvmObj.PageNo.HasValue ? shopvmObj.PageNo > 0 ? shopvmObj.PageNo.Value : 1 : 1;
 
             var totalRecords = _unitOfWork.Product.GetCount(search != null ? s => s.Title.Contains(search) : null);
 
-            shopVM.Products = _unitOfWork.Product.GetAll(includeProperties:"Category");
+            shopVM.Products = _unitOfWork.Product.GetAll(includeProperties:"Category,Brands");
             
             if(shopVM.Products != null)
             {
-                if(shopvmObj.CategoryId.HasValue)
+                if(shopvmObj.CategoryId.HasValue && shopvmObj.CategoryId != 0 )
                 {
                     shopVM.Products = shopVM.Products.Where(x => x.CategoryId == shopvmObj.CategoryId.Value).ToList();
                 }
-
+                if(shopvmObj.BrandId.HasValue && shopvmObj.BrandId != 0 )
+                {
+                    shopVM.Products = shopVM.Products.Where(x => x.BrandId == shopvmObj.BrandId.Value).ToList();
+                }
                 if(!string.IsNullOrEmpty( shopvmObj.search))
                 {
                     shopVM.Products = shopVM.Products.Where(u => u.Title.Contains(shopvmObj.search)).ToList();
@@ -43,7 +50,7 @@ namespace Web.Controllers
                 {
                     shopVM.Products = shopVM.Products.Where(u => u.Price <= shopvmObj.MaximumPrice.Value).ToList();
                 }
-                if(shopvmObj.SortBy.HasValue)
+                if(shopvmObj.SortBy.HasValue && shopvmObj.CategoryId != 0 )
                 {
                     switch (shopvmObj.SortBy.Value)
                     {
@@ -61,7 +68,10 @@ namespace Web.Controllers
                             break;
                     }
                 }
-            
+                else
+                {
+                    shopVM.Products = shopVM.Products.ToList();
+                }
                 totalRecords = shopVM.Products.Count();
                 shopVM.Products =  shopVM.Products.Skip( Convert.ToInt32((shopVM.PageNo - 1) * 5)).Take(5).ToList();
 
@@ -72,5 +82,14 @@ namespace Web.Controllers
             return View(shopVM);
         }
 
+        public List<SelectListItem> ToSelectItems
+        {
+            get
+            {
+                var values = Enum.GetNames(typeof(SortByEnums));
+                return values.Select((t, i) => new SelectListItem() {Value = (1 + i ).ToString(), Text = t}).ToList();
+            }
+            
+        }
     }
 }

@@ -37,6 +37,7 @@ namespace Models
         [Range(1,1000)]
         public double Price100 { get; set; }
         [Required]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         
         [ForeignKey("CategoryId")]
@@ -46,13 +47,20 @@ namespace Models
         [ValidateNever]
         public string ImageUrl { get; set; }
         public string Barcode { get; set; }
+
+        [Display(Name = "Brand")]
         public int? BrandId { get; set; }
         [ValidateNever]
         public Brand? Brands { get; set; }
+
+        [Display(Name = "Sub Category")]
         public int? SubCategoryId { get; set; }
         [ValidateNever]
         public SubCategory? SubCategory { get; set; }
-        
+        public bool? Featured { get; set; }
+        public bool? Sale { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime UpdateDate { get; set; }
         
     }
 }

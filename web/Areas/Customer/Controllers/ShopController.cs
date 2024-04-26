@@ -33,7 +33,7 @@ namespace Web.Area.Customer.Controllers
             return View(new ShopVM());
         }
 
-        public IActionResult GetNewList(string search, int? pageNo, int? categoryId,int sortBy)
+        public IActionResult GetNewList(string search, int? pageNo, int? categoryId,int sortBy, int brandId)
         {
             
             ShopVM obj = new ShopVM()
@@ -41,7 +41,8 @@ namespace Web.Area.Customer.Controllers
                 search =  search,
                 PageNo = pageNo,
                 CategoryId = categoryId,
-                SortBy = sortBy
+                SortBy = sortBy,
+                BrandId = brandId
             };
             return ViewComponent("Shop", obj);
         }

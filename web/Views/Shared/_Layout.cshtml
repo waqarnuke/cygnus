@@ -1,8 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Http 
+@using DataAccess.Repository
 @using Microsoft.AspNetCore.Identity
 @using Models.Identity
 @inject IHttpContextAccessor HttpContextAccessor 
 @inject SignInManager<AppUser> _signInManager
+@* @model HomeVM *@
 
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
@@ -34,51 +36,8 @@
 </head>
 <body>
     <!-- Header area start here -->
-    <div class="top__header black-area pt-30 pb-30">
-        <div class="container">
-            <div class="top__wrapper">
-                <a href="index.html" class="main__logo">
-                    <img src="~/assets/images/logo/logo.svg" alt="logo__image">
-                </a>
-                <div class="search__wrp">
-                    <input placeholder="Search for" aria-label="Search">
-                    <button><i class="fa-solid fa-search"></i></button>
-                </div>
-                <div class="account__wrap">
-                    <!-- Account div -->
-                    <!-- 
-                    <div class="account d-flex align-items-center">
-                        <div class="user__icon">
-                            <a href="#0">
-                                <i class="fa-regular fa-user"></i>
-                            </a>
-                        </div>
-                        <a href="#0" class="acc__cont">
-                            <span class="text-white">
-                                My Account asdfasd asdfasd
-                            </span>
-                        </a>
-                    </div>
-                     -->
-                    <div class="cart d-flex align-items-center">
-                        <span class="cart__icon">
-                            <i class="fa-regular fa-cart-shopping"></i>
-                        </span>
-                        <a href="#0" class="c__one">
-                            <span class="text-white">
-                                $0.00
-                            </span>
-                        </a>
-                        <span class="one text-white">
-                            0
-                        </span>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    <header class="header-section black-area">
+    <div class="">
+            <header class="header-section black-area">
         <div class="container">
             <div class="header-wrapper">
                 <div class="header-bar light-bar d-lg-none">
@@ -122,11 +81,6 @@
                     }
                     @if(_signInManager.IsSignedIn(User))
                     {
-                        <li>
-                            <a asp-area="Customer" asp-controller="Cart" asp-action="Index">
-                                cart
-                            </a>
-                        </li>
                         <li class="subtwohober">
                                     <a asp-area="Admin"asp-controller="Order" asp-action="Index">Manager Order</a>
                         </li>
@@ -134,7 +88,7 @@
                     
                 </ul>
                 <div class="shipping__item d-none d-sm-flex align-items-center">
-                    <div class="menu__right d-flex align-items-center">
+                    @* <div class="menu__right d-flex align-items-center">
                         <div class="thumb">
                             <img src="~/assets/images/flag/picking.png" alt="image">
                         </div>
@@ -159,17 +113,21 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div> *@
                     <div class="menu__right d-flex align-items-center">
-                        <div class="thumb">
-                            <img src="~/assets/images/flag/shipping.png" alt="image">
-                        </div>
+                        <a class="nav-link text-white" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                            @await Component.InvokeAsync("ShoppingCart")
+                        </a>
+                        
+                        
                         <partial name="_LoginPartial"/>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    </div>
+
     <!-- Header area end here -->
 
     <!-- Preloader area start -->
@@ -218,7 +176,11 @@
                                 <li><a href="blog-grid.html"><span></span>News & Blog</a></li>
                                 <li><a href="error.html"><span></span>Careers</a></li>
                                 <li><a href="error.html"><span></span>Investors</a></li>
-                                <li><a href="contact.html"><span></span>Contact Us</a></li>
+                                <li>
+                                    <a href="contact.html"><span></span>
+                                        @* @Model.ContactUs.Value *@
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>

@@ -34,9 +34,12 @@ public class HomeController : Controller
         {
             Products = _unitOfWork.Product.GetAll(),
             Categories = _unitOfWork.category.GetAll(),
-            Brands = _unitOfWork.Brand.GetAll()
+            Brands = _unitOfWork.Brand.GetAll(),
+            ContactUs = _unitOfWork.SiteConfig.GetSiteConfig("companyAddress")
+            
         };
 
+        model.Products = model.Products.OrderByDescending(x => x.Id).Take(6).ToList();
         return View(model);
     }
 

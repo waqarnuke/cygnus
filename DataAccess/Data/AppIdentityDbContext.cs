@@ -22,6 +22,7 @@ namespace DataAccess.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<AppUser> AspNetUsers { get; set; }
+        public DbSet<SiteConfig> SiteConfig { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -11,6 +11,7 @@ namespace DataAccess.Repository.IRepository
         IOrderHeaderRepository OrderHeader {get;}
         IBrandRepository Brand {get;}
         ISubCategoryRepository SubCategory {get;}
+        ISiteConfigRepository SiteConfig {get;}
         void Save();
     }
 }

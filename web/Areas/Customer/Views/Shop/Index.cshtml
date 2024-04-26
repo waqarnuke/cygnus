@@ -1,20 +1,17 @@
 ﻿@model Web.ViewModel.ShopVM
-<section class="page-banner pt-70 pb-130">
 
 
-<div class="row g-4">
-    <div class="col-xl-3 col-lg-3">
+<section class="page-banner ">
+<div class="row d-flex">
+    <div class="col-lg-3">
         
         @await Component.InvokeAsync("Category")
     </div>
-    <div class="col-xl-9 col-lg-9">
-        
-        <div class="row pb-5">
-            <div id=tableContainer>
+    <div class="col-lg-9">
+        <div id=tableContainer>
                 @await Component.InvokeAsync("Shop", Model)
-            </div>
         </div>
-</div>
+    </div>
 </section>
 
 

@@ -1,6 +1,7 @@
 using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Models.ViewModels;
 
 namespace Web.Controllers
 {
@@ -13,13 +14,18 @@ namespace Web.Controllers
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            HomeVM homevm = new ()
+            {
+                Categories = _unitOfWork.category.GetAll().ToList(),
+                Brands = _unitOfWork.Brand.GetAll()
+            };
             IEnumerable<SelectListItem> categorytList = _unitOfWork.category.GetAll().Select(u => new SelectListItem
             {
                 Text = u.Name,
                 Value = u.Id.ToString()
             });
             
-            return View(categorytList);
+            return View(homevm);
         }
 
     }

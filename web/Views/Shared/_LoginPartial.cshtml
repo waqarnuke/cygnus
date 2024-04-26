@@ -1,8 +1,7 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿﻿@using Microsoft.AspNetCore.Identity
 @using Models.Identity
 @inject SignInManager<AppUser> _signInManager
 @inject UserManager<AppUser> _userManager
-
 
 
  @if(_signInManager.IsSignedIn(User))
@@ -17,6 +16,7 @@
         {
             <div class="content">
                 <p>
+                   
                     <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a><br> 
                     <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Register">Register</a>
                 </p>

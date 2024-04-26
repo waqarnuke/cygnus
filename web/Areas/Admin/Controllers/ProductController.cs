@@ -91,10 +91,12 @@ namespace Web.Areas.Admin.Controllers
                 }
                 if(productVM.Product.Id == 0)
                 {
+                    productVM.Product.CreateDate = DateTime.UtcNow;
                     _unitOfWrok.Product.Add(productVM.Product);
                 }
                 else
                 {
+                    productVM.Product.UpdateDate = DateTime.UtcNow;
                     _unitOfWrok.Product.Update(productVM.Product);
                 }
                 _unitOfWrok.Save();

@@ -242,6 +242,9 @@ public class CartController : Controller
 
     private double GetPriceBasedOnQuantity(ShoppingCart shoppingCart)
     {
+
+        return shoppingCart.Product.Price;
+        // this login for discount 
         if(shoppingCart.Count <= 50)
         {
             return shoppingCart.Product.Price;

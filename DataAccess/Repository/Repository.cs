@@ -117,7 +117,5 @@ namespace DataAccess.Repository
 
             return entity.ToList();
         }
-
-        
     }
 }
