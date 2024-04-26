@@ -59,8 +59,8 @@ namespace Models
         public SubCategory? SubCategory { get; set; }
         public bool? Featured { get; set; }
         public bool? Sale { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime UpdateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
         
     }
 }

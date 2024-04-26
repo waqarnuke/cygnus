@@ -64,7 +64,11 @@ namespace DataAccess.Data
                     Price50=85,
                     Price100=80,
                     CategoryId = 1,
-                    ImageUrl="\\images\\product\\fortune of time.jpg"
+                    ImageUrl="\\images\\product\\fortune of time.jpg",
+                    Barcode="345345566456",
+                    CreateDate = DateTime.UtcNow,
+                    UpdateDate = DateTime.UtcNow,
+
                 },
                 new Product
                 {
@@ -78,7 +82,10 @@ namespace DataAccess.Data
                     Price50 = 25,
                     Price100 = 20,
                     CategoryId = 1,
-                    ImageUrl="\\images\\product\\dark skies.jpg"
+                    ImageUrl="\\images\\product\\dark skies.jpg",
+                    Barcode="345345566456",
+                    CreateDate = DateTime.UtcNow,
+                    UpdateDate = DateTime.UtcNow,
                 },
                 new Product
                 {
@@ -92,7 +99,10 @@ namespace DataAccess.Data
                     Price50 = 40,
                     Price100 = 35,
                     CategoryId = 2,
-                    ImageUrl="\\images\\product\\vanish in the sunset.jpg"
+                    ImageUrl="\\images\\product\\vanish in the sunset.jpg",
+                    Barcode="345345566456",
+                    CreateDate = DateTime.UtcNow,
+                    UpdateDate = DateTime.UtcNow,
                 },
                 new Product
                 {
@@ -106,7 +116,10 @@ namespace DataAccess.Data
                     Price50 = 60,
                     Price100 = 55,
                     CategoryId = 2,
-                    ImageUrl="\\images\\product\\cotton candy.jpg"
+                    ImageUrl="\\images\\product\\cotton candy.jpg",
+                    Barcode="345345566456",
+                    CreateDate = DateTime.UtcNow,
+                    UpdateDate = DateTime.UtcNow,
                 },
                 new Product
                 {
@@ -120,7 +133,10 @@ namespace DataAccess.Data
                     Price50 = 25,
                     Price100 = 20,
                     CategoryId = 3,
-                    ImageUrl="\\images\\product\\rock in the ocean back.jpg"
+                    ImageUrl="\\images\\product\\rock in the ocean back.jpg",
+                    Barcode="345345566456",
+                    CreateDate = DateTime.UtcNow,
+                    UpdateDate = DateTime.UtcNow,
                 },
                 new Product
                 {
@@ -134,7 +150,10 @@ namespace DataAccess.Data
                     Price50 = 22,
                     Price100 = 20,
                     CategoryId = 3,
-                    ImageUrl="\\images\\product\\leaves and wonders.jpg"
+                    ImageUrl="\\images\\product\\leaves and wonders.jpg",
+                    Barcode="345345566456",
+                    CreateDate = DateTime.UtcNow,
+                    UpdateDate = DateTime.UtcNow,
                 } 
             );
         }
