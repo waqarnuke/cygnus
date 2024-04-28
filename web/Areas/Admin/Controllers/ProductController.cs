@@ -14,12 +14,16 @@ namespace Web.Areas.Admin.Controllers
     [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
+        private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _webHostEnviroment;
         private readonly IUnitOfWork _unitOfWrok;
-        public ProductController(IUnitOfWork unitOfWrok, IWebHostEnvironment webHostEnviroment)
+        public ProductController(IUnitOfWork unitOfWrok, 
+            IWebHostEnvironment webHostEnviroment,
+            IConfiguration configuration)
         {
             _unitOfWrok = unitOfWrok;
             _webHostEnviroment = webHostEnviroment;
+            _configuration = configuration;
         }
         public IActionResult Index()
         {
@@ -30,8 +34,7 @@ namespace Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Upsert(int? id)
         {
-            string wwwRootPath = _webHostEnviroment.WebRootPath;
-            string productPath = Path.Combine(wwwRootPath, @"\images\");
+            string productPath = _configuration.GetSection("Path").GetSection("ImageDefauldPath").Value;
             ProductVM productVM = new ProductVM(){
                 CategoryList = _unitOfWrok.category.GetAll().Select(u => new SelectListItem {
                     Text = u.Name,
@@ -50,7 +53,7 @@ namespace Web.Areas.Admin.Controllers
             if(id ==null || id == 0)
             {
                 //create 
-                productVM.Product.ImageUrl = @"\images\placeholder.JPG" ;
+                productVM.Product.ImageUrl = productPath;
                 return View(productVM);
             }
             else
@@ -70,7 +73,8 @@ namespace Web.Areas.Admin.Controllers
                 if(file != null)
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string productPath = Path.Combine(wwwRootPath, @"images\product");
+
+                    string productPath = Path.Combine(wwwRootPath, _configuration.GetSection("Path").GetSection("ImageProductPath").Value);
 
                     if(!string.IsNullOrEmpty(productVM.Product.ImageUrl))
                     {
@@ -86,7 +90,7 @@ namespace Web.Areas.Admin.Controllers
                         file.CopyTo(fileStream);
                     }
 
-                    productVM.Product.ImageUrl =  @"\images\product\" + fileName;
+                    productVM.Product.ImageUrl = "\\" + Path.Combine( _configuration.GetSection("Path").GetSection("ImageProductPath").Value,fileName);
 
                 }
                 if(productVM.Product.Id == 0)

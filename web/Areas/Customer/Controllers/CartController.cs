@@ -8,31 +8,37 @@ using Microsoft.AspNetCore.Identity;
 using Models.Identity;
 using Utility.Common;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.JSInterop;
+
 namespace Web.Areas.Customer.Controllers;
 
 [Area("Customer")]
 [Authorize]
 public class CartController : Controller
 {
+    private readonly IJSRuntime _jsRuntime;
     private readonly ILogger<CartController> _logger;
     private readonly IUnitOfWork _unitOfwork;
     private readonly UserManager<AppUser> _userManager;
     private readonly IEmailSender _emailSender;
+    private readonly IConfiguration _configuration;
 
     [BindProperty]
     public ShoppingCartVM ShoppingCartVM {get; set;}
-    public CartController(ILogger<CartController> logger, IUnitOfWork unitOfWork, IEmailSender emailSender)
+    public CartController(ILogger<CartController> logger, IUnitOfWork unitOfWork, IEmailSender emailSender, IConfiguration configuration,IJSRuntime jsRuntime)
     {
             _emailSender = emailSender;
         _logger = logger;
         _unitOfwork = unitOfWork;
+        _configuration = configuration;
+        _jsRuntime = jsRuntime;
     }
 
     public IActionResult Index()
     {
         var clamidentity = (ClaimsIdentity)User.Identity;
         var userId = clamidentity.FindFirst(ClaimTypes.NameIdentifier).Value;    
-
+        //var cartProduct = 
         ShoppingCartVM shoppingCartVM = new (){
             ShoppingCartList = _unitOfwork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties:"Product"),
             OrderHeader=new()
@@ -133,7 +139,7 @@ public class CartController : Controller
 
         if(appuser.CompanyId.GetValueOrDefault() == 0)
         {
-            var domain = "http://localhost:5282/";
+            var domain = _configuration.GetSection("Stripe").GetSection("domain").Value; //"http://localhost:5282/";
             var options = new Stripe.Checkout.SessionCreateOptions
             {
                 SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",

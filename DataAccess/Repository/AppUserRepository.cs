@@ -11,5 +11,10 @@ namespace DataAccess.Repository
         {
             _context = context;
         }
+
+        public void Update(AppUser appUser)
+        {
+            _context.AppUsers.Update(appUser);
+        }
     }
 }

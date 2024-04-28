@@ -17,8 +17,10 @@ namespace Web.Areas.Admin.Controllers
         private readonly IUnitOfWork _unitOfWork;
         [BindProperty]
         public OrderVM OrderVM {get; set;}
-        public OrderController(ILogger<OrderController> logger , IUnitOfWork unitOfWork)
+        private readonly IConfiguration _configuration;
+        public OrderController(ILogger<OrderController> logger , IUnitOfWork unitOfWork, IConfiguration configuration)
         {
+            _configuration = configuration;
             _unitOfWork = unitOfWork;
             _logger = logger;
         }
@@ -126,7 +128,7 @@ namespace Web.Areas.Admin.Controllers
             OrderVM.OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderHeaderId==OrderVM.OrderHeader.Id, includeProperties:"Product");
             
             //stripe logic
-            var domain = "http://localhost:5282/";
+            var domain = _configuration.GetSection("Stripe").GetSection("domain").Value; 
             var options = new Stripe.Checkout.SessionCreateOptions
             {
                 SuccessUrl = domain + $"admin/order/PaymentConfirmation?orderHeaderId={OrderVM.OrderHeader.Id}",

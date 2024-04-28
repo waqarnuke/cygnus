@@ -119,20 +119,24 @@
                     </div>
                     <div class="swiper category__slider">
                         <div class="swiper-wrapper">
-                            @foreach (var item in Model.Categories)
+                            @if (Model.Categories != null)
                             {
-                                <div class="swiper-slide">
-                                <div class="category__item category-two__item text-center">
-                                    <a href="shop.html" class="category__image d-block">
-                                        <img src="assets/images/category/category-image1.png" alt="image">
-                                        <div class="category-icon">
-                                            <img src="assets/images/category/category-icon1.png" alt="icon">
+                                 foreach (var item in Model.Categories)
+                                    {
+                                        <div class="swiper-slide">
+                                        <div class="category__item category-two__item text-center">
+                                            <a href="shop.html" class="category__image d-block">
+                                                <img src="assets/images/category/category-image1.png" alt="image">
+                                                <div class="category-icon">
+                                                    <img src="assets/images/category/category-icon1.png" alt="icon">
+                                                </div>
+                                            </a>
+                                            <h4 class="mt-30"><a href="shop.html">@item.Name</a></h4>
                                         </div>
-                                    </a>
-                                    <h4 class="mt-30"><a href="shop.html">@item.Name</a></h4>
-                                </div>
-                            </div>
+                                    </div>
+                                    }
                             }
+                           
                             
                             @* <div class="swiper-slide">
                                 <div class="category__item category-two__item text-center">
@@ -278,36 +282,30 @@
                 <div class="tab-content">
                     <div id="latest-item" class="tab-pane fade show active">
                         <div class="row g-4">
-                            @foreach (var item in Model.Products)
+                            @if(Model.Products != null)
                             {
-                            <div class="col-xxl-3 col-xl-4 col-md-6">
-                                <div class="product__item bor">
-                                    <a href="#0" class="wishlist"><i class="fa-regular fa-heart"></i></a>
-                                    <a href="shop-single.html" class="product__image pt-20 d-block">
-                                        <img class="font-image" src="assets/images/product/product-image1.png"
-                                            alt="image">
-                                        <img class="back-image" src="@item.ImageUrl"
-                                            alt="image">
-                                    </a>
-                                    <div class="product__content">
-                                        <h4 class="mb-15"><a class="primary-hover" href="shop-single.html">@item.Title</a></h4>
-                                        <del>@item.ListPrice.ToString("c")</del><span class="primary-color ml-10">@item.Price.ToString("c")</span>
-                                        <div class="star mt-20">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
+                                foreach (var item in Model.Products)
+                                {
+                                <div class="col-xxl-3 col-xl-4 col-md-6">
+                                    <div class="product__item bor">
+                                        <a href="shop-single.html" class="product__image pt-20 d-block">
+                                            
+                                            <img class="font-image" src="@item.ImageUrl"alt="image">
+                                            
+                                        </a>
+                                        <div class="product__content">
+                                            <h4 class="mb-15"><a class="primary-hover" href="shop-single.html">@item.Title</a></h4>
+                                            <del>@item.ListPrice.ToString("c")</del><span class="primary-color ml-10">@item.Price.ToString("c")</span>
                                         </div>
-
+                                        <a class="product__cart d-block bor-top" href="#0"><i
+                                                class="fa-regular fa-cart-shopping primary-color me-1"></i>
+                                            <span>Add to
+                                                cart</span></a>
                                     </div>
-                                    <a class="product__cart d-block bor-top" href="#0"><i
-                                            class="fa-regular fa-cart-shopping primary-color me-1"></i>
-                                        <span>Add to
-                                            cart</span></a>
                                 </div>
-                            </div>
+                                }
                             }
+                            
                             
                             @* <div class="col-xxl-3 col-xl-4 col-md-6">
                                 <div class="product__item bor">

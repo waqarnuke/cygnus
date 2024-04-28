@@ -10,12 +10,14 @@ namespace Web.Areas.Admin.Controllers
     [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
+        private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _webHostEnviroment;
         private readonly IUnitOfWork _unitOfWrok;
-        public CategoryController(IUnitOfWork unitOfWrok,IWebHostEnvironment webHostEnviroment)
+        public CategoryController(IUnitOfWork unitOfWrok,IWebHostEnvironment webHostEnviroment,IConfiguration configuration)
         {
             _unitOfWrok = unitOfWrok;
             _webHostEnviroment = webHostEnviroment;
+            _configuration = configuration;
         }
         public IActionResult Index()
         {
@@ -26,10 +28,11 @@ namespace Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Upsert(int? id)
         {
+            string productPath = _configuration.GetSection("Path").GetSection("ImageDefauldPath").Value;
             Category cat = new Category();
             if(id == null || id == 0)
             {
-                cat.ImageUrl =  @"\images\placeholder.JPG" ;
+                cat.ImageUrl =  productPath ;
                 return View(cat);
             }
             else
@@ -49,7 +52,7 @@ namespace Web.Areas.Admin.Controllers
                 if(file != null)
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string categoryPath = Path.Combine(wwwRootPath, @"images\category");
+                    string categoryPath = Path.Combine(wwwRootPath,_configuration.GetSection("Path").GetSection("ImageProductPath").Value);
 
                     if(!string.IsNullOrEmpty(category.ImageUrl))
                     {
@@ -65,7 +68,7 @@ namespace Web.Areas.Admin.Controllers
                         file.CopyTo(fileStream);
                     }
 
-                    category.ImageUrl =  @"\images\category\" + fileName;
+                    category.ImageUrl = "\\" + Path.Combine( _configuration.GetSection("Path").GetSection("ImageProductPath").Value,fileName);
 
                 }
             

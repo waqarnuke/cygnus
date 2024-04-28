@@ -88,39 +88,14 @@
                     
                 </ul>
                 <div class="shipping__item d-none d-sm-flex align-items-center">
-                    @* <div class="menu__right d-flex align-items-center">
-                        <div class="thumb">
-                            <img src="~/assets/images/flag/picking.png" alt="image">
-                        </div>
-                        <div class="content">
-                            <p class="text-white">
-                                Picking up?
-                            </p>
-                            <div class="items ns-head">
-                                <select class="form__select p-0">
-                                    <option value="1">
-                                        Select Store
-                                    </option>
-                                    <option value="2">
-                                        Store One
-                                    </option>
-                                    <option value="3">
-                                        Store Two
-                                    </option>
-                                    <option value="4">
-                                        Store Three
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div> *@
                     <div class="menu__right d-flex align-items-center">
                         <a class="nav-link text-white" asp-area="Customer" asp-controller="Cart" asp-action="Index">
                             @await Component.InvokeAsync("ShoppingCart")
                         </a>
-                        
-                        
-                        <partial name="_LoginPartial"/>
+                       
+                    </div>
+                    <div class="menu__right d-flex align-items-center">
+                         <partial name="_LoginPartial"/>
                     </div>
                 </div>
             </div>

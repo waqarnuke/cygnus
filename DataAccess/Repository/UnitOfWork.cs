@@ -26,7 +26,7 @@ namespace DataAccess.Repository
             Product = new ProductRepository(_context);
             Company = new CompanyRepository(_context);
             ShoppingCart = new ShoppingCartRepository(_context);
-            AppUser = new AppUserRepository(context);
+            AppUser = new AppUserRepository(_context);
             OrderDetail = new OrderDetailRepository(_context);
             OrderHeader = new OrderHeaderRepository(_context);
             Brand = new BrandRepository(_context);

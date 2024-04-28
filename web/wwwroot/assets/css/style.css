@@ -3217,13 +3217,13 @@ input {
   transform: translateY(-10px);
 }
 .product__item:hover .font-image {
-  opacity: 0;
-  visibility: hidden;
-}
-.product__item:hover .back-image {
   opacity: 1;
   visibility: visible;
 }
+/* .product__item:hover .back-image {
+  opacity: 1;
+  visibility: visible;
+} */
 .product__item:hover .wishlist {
   opacity: 1;
   visibility: visible;

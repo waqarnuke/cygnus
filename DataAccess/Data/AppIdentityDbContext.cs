@@ -10,9 +10,7 @@ namespace DataAccess.Data
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> option) :base(option)
         {
         }
-        //public DbSet<OrderHeader> OrderHeaders { get; set; }
-        //public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<AppUser> AppUsers { get; set; }
+        
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Company> Company { get; set; }
@@ -21,8 +19,9 @@ namespace DataAccess.Data
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
-        public DbSet<AppUser> AspNetUsers { get; set; }
+        //public DbSet<AppUser> AspNetUsers { get; set; }
         public DbSet<SiteConfig> SiteConfig { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -66,9 +65,12 @@ namespace DataAccess.Data
                     CategoryId = 1,
                     ImageUrl="\\images\\product\\fortune of time.jpg",
                     Barcode="345345566456",
-                    CreateDate = DateTime.UtcNow,
-                    UpdateDate = DateTime.UtcNow,
-
+                    BrandId = 1,
+                    SubCategoryId =1,
+                    Featured = false,
+                    Sale = false,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now
                 },
                 new Product
                 {
@@ -84,8 +86,13 @@ namespace DataAccess.Data
                     CategoryId = 1,
                     ImageUrl="\\images\\product\\dark skies.jpg",
                     Barcode="345345566456",
-                    CreateDate = DateTime.UtcNow,
-                    UpdateDate = DateTime.UtcNow,
+                    BrandId = 1,
+                    SubCategoryId =1,
+                    Featured = false,
+                    Sale = false,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now
+                    
                 },
                 new Product
                 {
@@ -101,8 +108,13 @@ namespace DataAccess.Data
                     CategoryId = 2,
                     ImageUrl="\\images\\product\\vanish in the sunset.jpg",
                     Barcode="345345566456",
-                    CreateDate = DateTime.UtcNow,
-                    UpdateDate = DateTime.UtcNow,
+                    BrandId = 2,
+                    SubCategoryId = 2,
+                    Featured = false,
+                    Sale = false,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now
+                    
                 },
                 new Product
                 {
@@ -118,8 +130,13 @@ namespace DataAccess.Data
                     CategoryId = 2,
                     ImageUrl="\\images\\product\\cotton candy.jpg",
                     Barcode="345345566456",
-                    CreateDate = DateTime.UtcNow,
-                    UpdateDate = DateTime.UtcNow,
+                    BrandId = 2,
+                    SubCategoryId = 2,
+                    Featured = false,
+                    Sale = false,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now
+                    
                 },
                 new Product
                 {
@@ -135,8 +152,13 @@ namespace DataAccess.Data
                     CategoryId = 3,
                     ImageUrl="\\images\\product\\rock in the ocean back.jpg",
                     Barcode="345345566456",
-                    CreateDate = DateTime.UtcNow,
-                    UpdateDate = DateTime.UtcNow,
+                    BrandId = 3,
+                    SubCategoryId = 3,
+                    Featured = false,
+                    Sale = false,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now
+                    
                 },
                 new Product
                 {
@@ -152,8 +174,13 @@ namespace DataAccess.Data
                     CategoryId = 3,
                     ImageUrl="\\images\\product\\leaves and wonders.jpg",
                     Barcode="345345566456",
-                    CreateDate = DateTime.UtcNow,
-                    UpdateDate = DateTime.UtcNow,
+                    BrandId = 3,
+                    SubCategoryId = 3,
+                    Featured = false,
+                    Sale = false,
+                    CreateDate = DateTime.Now,
+                    UpdateDate = DateTime.Now
+                    
                 } 
             );
         }

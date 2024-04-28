@@ -51,16 +51,16 @@ namespace Models
         [Display(Name = "Brand")]
         public int? BrandId { get; set; }
         [ValidateNever]
-        public Brand? Brands { get; set; }
+        public Brand Brands { get; set; }
 
         [Display(Name = "Sub Category")]
         public int? SubCategoryId { get; set; }
         [ValidateNever]
-        public SubCategory? SubCategory { get; set; }
-        public bool? Featured { get; set; }
-        public bool? Sale { get; set; }
-        public DateTime? CreateDate { get; set; }
-        public DateTime? UpdateDate { get; set; }
+        public SubCategory SubCategory { get; set; }
+        public bool? Featured { get; set; } = false;
+        public bool? Sale { get; set; } = false;
+        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime UpdateDate { get; set; } = DateTime.Now;
         
     }
 }
