@@ -11,8 +11,9 @@ namespace Models.Identity
         public int? CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         [ValidateNever]
+        public Company? Compnay { get; set; }
         [NotMapped]
-        public Company Compnay { get; set; }
+        public string Role { get; set; }
 
     }
 }

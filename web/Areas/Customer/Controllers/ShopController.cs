@@ -82,10 +82,40 @@ namespace Web.Area.Customer.Controllers
             }
 
             TempData["success"] = "Cart updated successfully";
-            
-            return Redirect(nameof(Index));
+             return Redirect(nameof(Index));
+
         }
 
-        
+        [Authorize]
+        public IActionResult AddToCart(int productId, int count)
+        {
+            var clamidentity = (ClaimsIdentity)User.Identity;
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId && u.ProductId == productId);
+
+            if(cartFromDb != null){
+                cartFromDb.Count += count;
+                _unitOfWork.ShoppingCart.Update(cartFromDb);
+            }
+            else
+            {
+                var cart = new ShoppingCart
+                  {
+                     ProductId = productId,
+                       Count = count == 0 ? 1 : count,
+                   ApplicationUserId = userId
+                  };
+
+                _unitOfWork.ShoppingCart.Add(cart);
+            }
+            _unitOfWork.Save();
+            HttpContext.Session.SetInt32(SD.SessionCart, 
+            _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).Count());
+            
+            TempData["success"] = "Cart updated successfully";
+            return Redirect(nameof(Index));
+        }
     }
 }

@@ -69,6 +69,7 @@
                     <div class="product__item bor">
                         <a href="#0" class="wishlist"><i class="fa-regular fa-heart"></i></a>
                         <a asp-action="Details" asp-route-productId="@item.Id" class="product__image pt-20 d-block">
+                            
                             <img class="font-image" src="@item.ImageUrl" alt="image">
                             
                         </a>
@@ -86,7 +87,11 @@
                             </div> *@
                         </div>
                         <div class="product__cart d-block bor-top">
-                            <button id="btnaddCard" class="btn btn-default" data-id="@item.Id"><i class="fa-regular fa-cart-shopping primary-color me-1"></i> <span>Add to cart</span></button>
+                            <a asp-action="AddToCart" asp-route-productId="@item.Id" class="product__image pt-20 d-block">
+                                Add to Cart
+                            
+                        </a>
+                        
                         </div>
                         
                     </div>
