@@ -2,10 +2,13 @@ using System.Data;
 using DataAccess.Data;
 using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Models.Identity;
+using Models.ViewModels;
 using Utility.Common;
 
 namespace Web.Areas.Admin.Controllers
@@ -15,16 +18,61 @@ namespace Web.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly AppIdentityDbContext _context;
-        public UserController(AppIdentityDbContext context, IWebHostEnvironment webHostEnviroment)
+        private readonly UserManager<AppUser> _userManager;
+        public UserController(AppIdentityDbContext context, IWebHostEnvironment webHostEnviroment, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
             return View();
         }
         
-        #region API CALLS
+        public IActionResult RoleManagment(string userId)
+        {
+            string RoleId = _context.UserRoles.FirstOrDefault(u => u.UserId == userId).RoleId;
+            RoleManagmentVM RoleVM = new RoleManagmentVM(){
+                ApplicationUser = _context.AppUsers.Include(u => u.Compnay).FirstOrDefault(u => u.Id == userId),
+                RoleList = _context.Roles.Select( i => new SelectListItem{
+                    Text = i.Name,
+                    Value = i.Name
+                }),
+                CompanyList = _context.Company.Select(i => new SelectListItem{
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+            };
+            RoleVM.ApplicationUser.Role = _context.Roles.FirstOrDefault(u => u.Id == RoleId).Name;
+
+            return View(RoleVM);
+        }
+        [HttpPost]
+        public IActionResult RoleManagment(RoleManagmentVM roleManagmentVM)
+        {
+            string RoleId = _context.UserRoles.FirstOrDefault(u => u.UserId == roleManagmentVM.ApplicationUser.Id).RoleId;
+            string oldRole = _context.Roles.FirstOrDefault(u => u.Id == RoleId).Name;
+            
+            if(!(roleManagmentVM.ApplicationUser.Role == oldRole))
+            {
+                AppUser appUser = _context.AppUsers.FirstOrDefault(u => u.Id == roleManagmentVM.ApplicationUser.Id);
+                if(roleManagmentVM.ApplicationUser.Role == SD.Role_Company)
+                {
+                    appUser.CompanyId = roleManagmentVM.ApplicationUser.CompanyId;
+                }
+                if(oldRole == SD.Role_Company)
+                {
+                    appUser.CompanyId = null;
+                }
+                _context.SaveChanges();
+
+                _userManager.RemoveFromRoleAsync(appUser, oldRole).GetAwaiter().GetResult();
+                _userManager.AddToRoleAsync(appUser, roleManagmentVM.ApplicationUser.Role).GetAwaiter().GetResult();
+            }
+            return RedirectToAction("Index");
+        }
+        
+        #region API CALLS 
 
         [HttpGet]
         public IActionResult GetAll()
@@ -46,10 +94,10 @@ namespace Web.Areas.Admin.Controllers
             return Json(new {data = objUserList});    
         }
 
-        [HttpDelete]
-        public IActionResult LockUnLock([FromBody]string Id)
+        [HttpPost]
+        public IActionResult LockUnLock([FromBody]string id)
         {
-            var objFormDb = _context.AppUsers.FirstOrDefault(u => u.Id == Id);
+            var objFormDb = _context.AppUsers.FirstOrDefault(u => u.Id == id);
             if(objFormDb == null)
             {
                 return Json(new {success = false, message =  "Error while Locking/Unlocking"}); 
@@ -63,7 +111,7 @@ namespace Web.Areas.Admin.Controllers
                 objFormDb.LockoutEnd = DateTime.Now.AddYears(1000);
             }
             _context.SaveChanges();
-            return Json(new {success = false, message =  "Delete Successful."});     
+            return Json(new {success = true, message =  "Operation Successful."});     
         }
 
 
