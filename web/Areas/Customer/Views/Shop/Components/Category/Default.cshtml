@@ -2,40 +2,57 @@
 @using Utility.Common
 @model HomeVM
 
-<div class="product__left-item sub-bg">
- <h4 class="mb-30 left-title">
-    <span class="text-primary">Category</span>
-</h4>
-<ul class="list-group mb-3">
-    <li class="list-group-item d-flex justify-content-between lh-sm">
-        <button class="category" data-id ="0" >
-            <h6 class="my-0">All</h6>
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button collapsed fs-4 fw-normal" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            Category
         </button>
-    </li>
-    @foreach (var item in Model.Categories)
-    {
-        <li class="list-group-item d-flex justify-content-between lh-sm">
-        <button class="category" data-id = @item.Id >
-            <h6 class="my-0">@item.Name</h6>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+            <div class="accordion-body">
+                <ul class="text-start">
+                    <li class="bor-bottom pb-2 pt-2">
+                        <button class="category fs-5 fw-normal" data-id ="0" >
+                        All
+                        </button>
+                    </li>
+                    @foreach (var item in Model.Categories)
+                    {
+                        
+                        <li class="bor-bottom pb-2 pt-2">
+                            <button class="category fs-5 fw-normal" data-id = @item.Id >
+                                @item.Name
+                            </button>
+                        </li>
+                    }
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed  fs-4 fw-normal" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Brand
         </button>
-        <span class="text-body-secondary">@item.Id</span>
-        </li>
-    }
-    
-</ul>
-<h4 class="mb-30 left-title">
-    <span class="text-primary">Brand</span>
-</h4>
-<ul class="list-group list-group-flush text-start">
-    @foreach (var item in Model.Brands)
-    {
-    <li class="list-group-item align-items-start "> 
-        <a class="searchByBrand" id="Newest" brand-id="@item.Id">@item.Name</a> 
-    </li>
-    }
-</ul>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+        <ul class="text-start">
+            @foreach (var item in Model.Brands)
+            {
+            <li  class="bor-bottom pb-2 pt-2"> 
+                <button class="searchByBrand fs-5 fw-normal" id="Newest" brand-id="@item.Id">
+                    @item.Name
+                </button> 
+            </li>
+            }
+        </ul>
+        </div>
+    </div>
+    </div>
 </div>
-
 
 <script>
 

@@ -3,7 +3,26 @@
 @inject SignInManager<AppUser> _signInManager
 @inject UserManager<AppUser> _userManager
 
-<div class="thumb">
+    
+     @if(_signInManager.IsSignedIn(User))
+    {
+        <li  style="color:#f36944">
+             @_userManager.GetUserName(User)
+        </li>
+        <li>
+            <a class="text-white" asp-area="Identity" asp-controller="Account" asp-action="Logout">Logout</a>
+        </li>
+    }
+    else
+    {
+        <li>
+         <a class="text-white" asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a><br> 
+        </li>
+       
+    }
+    
+
+@* <div class="thumb">
     <div class="content">
          @if(_signInManager.IsSignedIn(User))
         { 
@@ -15,14 +34,7 @@
         {
              <p >
                 <a class="text-white" asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a><br> 
-                @* <a class="text-white" asp-area="Identity" asp-controller="Account" asp-action="Register">Register</a> *@
             </p>
         }
     </div>
-
- </div> 
-         @* <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
-                               @await Component.InvokeAsync("ShoppingCart")
-                            </a>
-                        </li> *@
+ </div>  *@

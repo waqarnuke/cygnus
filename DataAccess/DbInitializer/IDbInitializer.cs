@@ -7,6 +7,6 @@ namespace DataAccess.DbInitializer
 {
     public interface IDbInitializer
     {
-        public void Initializer();
+        public void Initialize();
     }
 }

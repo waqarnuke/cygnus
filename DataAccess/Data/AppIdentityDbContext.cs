@@ -40,9 +40,13 @@ namespace DataAccess.Data
             );
 
             modelBuilder.Entity<Category>().HasData(
-                new Category {Id=1 , Name="Action", DisplayOrder=1},
-                new Category {Id=2 , Name="SciFi", DisplayOrder=2},
-                new Category {Id=3 , Name="History", DisplayOrder=3}
+                new Category {Id=1 , Name="New", DisplayOrder=1},
+                new Category {Id=2 , Name="Sale", DisplayOrder=2},
+                new Category {Id=3 , Name="Disposables", DisplayOrder=3},
+                new Category {Id=4 , Name="E-Liquids", DisplayOrder=4},
+                new Category {Id=5 , Name="Vape kits", DisplayOrder=5},
+                new Category {Id=6 , Name="Accessories", DisplayOrder=6},
+                new Category {Id=7 , Name="Multifarious", DisplayOrder=6}
             );
 
             modelBuilder.Entity<Company>().HasData(

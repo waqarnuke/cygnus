@@ -3,11 +3,11 @@
 
 <section class="page-banner pt-50">
 <div class="row d-flex">
-    <div class="col-lg-3">
+    <div class="col-lg-2">
         
         @await Component.InvokeAsync("Category")
     </div>
-    <div class="col-lg-9">
+    <div class="col-lg-10">
         <div id=tableContainer>
                 @await Component.InvokeAsync("Shop", Model)
         </div>
