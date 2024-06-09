@@ -207,19 +207,43 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             DisplayOrder = 1,
-                            Name = "Action"
+                            Name = "New"
                         },
                         new
                         {
                             Id = 2,
                             DisplayOrder = 2,
-                            Name = "SciFi"
+                            Name = "Sale"
                         },
                         new
                         {
                             Id = 3,
                             DisplayOrder = 3,
-                            Name = "History"
+                            Name = "Disposables"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DisplayOrder = 4,
+                            Name = "E-Liquids"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DisplayOrder = 5,
+                            Name = "Vape kits"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DisplayOrder = 6,
+                            Name = "Accessories"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DisplayOrder = 6,
+                            Name = "Multifarious"
                         });
                 });
 
@@ -381,6 +405,8 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -539,6 +565,9 @@ namespace DataAccess.Migrations
                     b.Property<double>("Price50")
                         .HasColumnType("REAL");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool?>("Sale")
                         .HasColumnType("INTEGER");
 
@@ -570,7 +599,7 @@ namespace DataAccess.Migrations
                             Barcode = "345345566456",
                             BrandId = 1,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(87),
+                            CreateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1019),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "SWD9999001",
@@ -579,10 +608,11 @@ namespace DataAccess.Migrations
                             Price = 90.0,
                             Price100 = 80.0,
                             Price50 = 85.0,
+                            Quantity = 0,
                             Sale = false,
                             SubCategoryId = 1,
                             Title = "Fortune of Time",
-                            UpdateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(88)
+                            UpdateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1022)
                         },
                         new
                         {
@@ -591,7 +621,7 @@ namespace DataAccess.Migrations
                             Barcode = "345345566456",
                             BrandId = 1,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(94),
+                            CreateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1032),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "CAW777777701",
@@ -600,10 +630,11 @@ namespace DataAccess.Migrations
                             Price = 30.0,
                             Price100 = 20.0,
                             Price50 = 25.0,
+                            Quantity = 0,
                             Sale = false,
                             SubCategoryId = 1,
                             Title = "Dark Skies",
-                            UpdateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(95)
+                            UpdateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1034)
                         },
                         new
                         {
@@ -612,7 +643,7 @@ namespace DataAccess.Migrations
                             Barcode = "345345566456",
                             BrandId = 2,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(100),
+                            CreateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1042),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "RITO5555501",
@@ -621,10 +652,11 @@ namespace DataAccess.Migrations
                             Price = 50.0,
                             Price100 = 35.0,
                             Price50 = 40.0,
+                            Quantity = 0,
                             Sale = false,
                             SubCategoryId = 2,
                             Title = "Vanish in the Sunset",
-                            UpdateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(101)
+                            UpdateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1043)
                         },
                         new
                         {
@@ -633,7 +665,7 @@ namespace DataAccess.Migrations
                             Barcode = "345345566456",
                             BrandId = 2,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(106),
+                            CreateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1050),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "WS3333333301",
@@ -642,10 +674,11 @@ namespace DataAccess.Migrations
                             Price = 65.0,
                             Price100 = 55.0,
                             Price50 = 60.0,
+                            Quantity = 0,
                             Sale = false,
                             SubCategoryId = 2,
                             Title = "Cotton Candy",
-                            UpdateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(107)
+                            UpdateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1052)
                         },
                         new
                         {
@@ -654,7 +687,7 @@ namespace DataAccess.Migrations
                             Barcode = "345345566456",
                             BrandId = 3,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(112),
+                            CreateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1059),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "SOTJ1111111101",
@@ -663,10 +696,11 @@ namespace DataAccess.Migrations
                             Price = 27.0,
                             Price100 = 20.0,
                             Price50 = 25.0,
+                            Quantity = 0,
                             Sale = false,
                             SubCategoryId = 3,
                             Title = "Rock in the Ocean",
-                            UpdateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(113)
+                            UpdateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1060)
                         },
                         new
                         {
@@ -675,7 +709,7 @@ namespace DataAccess.Migrations
                             Barcode = "345345566456",
                             BrandId = 3,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(118),
+                            CreateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1068),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "FOT000000001",
@@ -684,10 +718,11 @@ namespace DataAccess.Migrations
                             Price = 23.0,
                             Price100 = 20.0,
                             Price50 = 22.0,
+                            Quantity = 0,
                             Sale = false,
                             SubCategoryId = 3,
                             Title = "Leaves and Wonders",
-                            UpdateDate = new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(119)
+                            UpdateDate = new DateTime(2024, 5, 23, 22, 3, 46, 211, DateTimeKind.Local).AddTicks(1069)
                         });
                 });
 
@@ -821,6 +856,15 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Models.Identity.AppUser", b =>
+                {
+                    b.HasOne("Models.Company", "Compnay")
+                        .WithMany()
+                        .HasForeignKey("CompanyId");
+
+                    b.Navigation("Compnay");
                 });
 
             modelBuilder.Entity("Models.OrderDetail", b =>

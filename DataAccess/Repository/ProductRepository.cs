@@ -27,6 +27,10 @@ namespace DataAccess.Repository
                 objFormDb.Description = obj.Description;
                 objFormDb.CategoryId = obj.CategoryId;
                 objFormDb.Author = obj.Author;
+                objFormDb.BrandId = obj.BrandId;
+                objFormDb.SubCategoryId = obj.SubCategoryId;
+                objFormDb.Barcode = obj.Barcode;
+                objFormDb.Quantity = obj.Quantity;
                 if(obj.ImageUrl != null)
                 {
                     objFormDb.ImageUrl = obj.ImageUrl;

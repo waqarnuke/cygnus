@@ -1,17 +1,15 @@
 ﻿@model List<Product>
 
 <div class="container">
-    <div class="row pt-4">
-        <div class="col-6 text-primary"><h3 class="text-primary">Product</h2></div>
-        <div class="col-6 text-end">
-            <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
+    <div class="flex pt-4">
+        <h3 class="text-primary">Product</h2>
+        
+         <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> New
             </a>
             <a asp-controller="Product" asp-action="uploadFile" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> Add bulk data
             </a>
-        </div>
-        
     </div>
     <table id="tblData" class="table table-bordered table-striped" style="width: 100%;">
         <thead>

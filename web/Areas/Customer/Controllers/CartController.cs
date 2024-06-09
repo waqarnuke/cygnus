@@ -267,4 +267,37 @@ public class CartController : Controller
             }
         }
     }
+
+    public IActionResult UpdateQuantity()
+    {
+        var clamidentity = (ClaimsIdentity)User.Identity;
+        var userId = clamidentity.FindFirst(ClaimTypes.NameIdentifier).Value;  
+
+        var cartFormDb = _unitOfwork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId);
+        List<Product> product = _unitOfwork.Product.GetAll().Where(p => cartFormDb.Any(c=>c.ProductId == p.Id)).ToList();
+        foreach (var item in product)
+        {
+            foreach (var cart in cartFormDb)
+            {
+                if(cart.ProductId == item.Id)
+                {
+                    var updateQty = item.Quantity - cart.Count;
+                    item.Quantity = updateQty;
+                    _unitOfwork.Product.Update(item);
+                }
+            }
+            _unitOfwork.Save();
+        }
+        
+         //Session set
+       
+        // _unitOfwork.ShoppingCart.Remove(cartFormDb);
+        // _unitOfwork.Save();
+        
+        return  RedirectToAction(nameof(Index));
+
+    }
+
+
+
 }

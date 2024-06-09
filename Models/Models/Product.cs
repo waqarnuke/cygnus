@@ -61,6 +61,7 @@ namespace Models
         public bool? Sale { get; set; } = false;
         public DateTime CreateDate { get; set; } = DateTime.Now;
         public DateTime UpdateDate { get; set; } = DateTime.Now;
+        public int Quantity { get; set; }
         
     }
 }

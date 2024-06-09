@@ -6,19 +6,18 @@
     
      @if(_signInManager.IsSignedIn(User))
     {
-        <li  style="color:#f36944">
-             @_userManager.GetUserName(User)
+        <li class="nav-item" style="color:#f36944">
+          <a class="nav-link" > @_userManager.GetUserName(User)</a>  
         </li>
-        <li>
-            <a class="text-white" asp-area="Identity" asp-controller="Account" asp-action="Logout">Logout</a>
+        <li  class="nav-item">
+            <a   class="nav-link"  asp-area="Identity" asp-controller="Account" asp-action="Logout">Logout</a>
         </li>
     }
     else
     {
-        <li>
-         <a class="text-white" asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a><br> 
+        <li class="nav-item">
+            <a  class="nav-link"  asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a><br> 
         </li>
-       
     }
     
 

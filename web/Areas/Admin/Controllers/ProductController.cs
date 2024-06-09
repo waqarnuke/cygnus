@@ -113,11 +113,19 @@ namespace Web.Areas.Admin.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()    
                 });
+                productVM.BrandList = _unitOfWrok.Brand.GetAll().Select(u => new SelectListItem {
+                    Text = u.Name,
+                    Value=u.Id.ToString()
+                });
+                productVM.SubCategoryList = _unitOfWrok.SubCategory.GetAll().Select(u => new SelectListItem {
+                    Text = u.Name,
+                    Value=u.Id.ToString()
+                });
                 return View(productVM);
             }
         }
         
-         [HttpGet]
+        [HttpGet]
         public IActionResult uploadFile()
         {
             return View();
@@ -192,7 +200,13 @@ namespace Web.Areas.Admin.Controllers
                                             break;
                                         case "Price100":
                                             product.Price100 = Convert.ToDouble(cellValue);
-                                            break;                    
+                                            break;
+                                        case "BrandId":
+                                            product.BrandId = Convert.ToInt32(cellValue);
+                                            break;
+                                        case "SubCategoryId":
+                                            product.SubCategoryId = Convert.ToInt32(cellValue);
+                                            break;                             
                                         default:
                                             
                                             break;

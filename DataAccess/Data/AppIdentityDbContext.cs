@@ -74,7 +74,8 @@ namespace DataAccess.Data
                     Featured = false,
                     Sale = false,
                     CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now
+                    UpdateDate = DateTime.Now,
+                    Quantity = 15
                 },
                 new Product
                 {
@@ -95,7 +96,8 @@ namespace DataAccess.Data
                     Featured = false,
                     Sale = false,
                     CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now
+                    UpdateDate = DateTime.Now,
+                    Quantity = 15
                     
                 },
                 new Product
@@ -117,7 +119,8 @@ namespace DataAccess.Data
                     Featured = false,
                     Sale = false,
                     CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now
+                    UpdateDate = DateTime.Now,
+                    Quantity = 15
                     
                 },
                 new Product
@@ -139,7 +142,8 @@ namespace DataAccess.Data
                     Featured = false,
                     Sale = false,
                     CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now
+                    UpdateDate = DateTime.Now,
+                    Quantity = 15
                     
                 },
                 new Product
@@ -161,7 +165,8 @@ namespace DataAccess.Data
                     Featured = false,
                     Sale = false,
                     CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now
+                    UpdateDate = DateTime.Now,
+                    Quantity = 15
                     
                 },
                 new Product
@@ -183,7 +188,8 @@ namespace DataAccess.Data
                     Featured = false,
                     Sale = false,
                     CreateDate = DateTime.Now,
-                    UpdateDate = DateTime.Now
+                    UpdateDate = DateTime.Now,
+                    Quantity = 15
                     
                 } 
             );
