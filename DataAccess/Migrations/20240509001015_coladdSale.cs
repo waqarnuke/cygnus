@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class coladdSale : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,33 +25,6 @@ namespace DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    DisplayName = table.Column<string>(type: "TEXT", nullable: true),
-                    CompanyId = table.Column<int>(type: "INTEGER", nullable: true),
-                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -145,6 +118,83 @@ namespace DataAccess.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    DisplayName = table.Column<string>(type: "TEXT", nullable: true),
+                    CompanyId = table.Column<int>(type: "INTEGER", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Company_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Company",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    ISBN = table.Column<string>(type: "TEXT", nullable: false),
+                    Author = table.Column<string>(type: "TEXT", nullable: false),
+                    ListPrice = table.Column<double>(type: "REAL", nullable: false),
+                    Price = table.Column<double>(type: "REAL", nullable: false),
+                    Price50 = table.Column<double>(type: "REAL", nullable: false),
+                    Price100 = table.Column<double>(type: "REAL", nullable: false),
+                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    Barcode = table.Column<string>(type: "TEXT", nullable: true),
+                    BrandId = table.Column<int>(type: "INTEGER", nullable: true),
+                    SubCategoryId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Featured = table.Column<bool>(type: "INTEGER", nullable: true),
+                    Sale = table.Column<bool>(type: "INTEGER", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_SubCategories_SubCategoryId",
+                        column: x => x.SubCategoryId,
+                        principalTable: "SubCategories",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -293,48 +343,29 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "ShoppingCarts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    ISBN = table.Column<string>(type: "TEXT", nullable: false),
-                    Author = table.Column<string>(type: "TEXT", nullable: false),
-                    ListPrice = table.Column<double>(type: "REAL", nullable: false),
-                    Price = table.Column<double>(type: "REAL", nullable: false),
-                    Price50 = table.Column<double>(type: "REAL", nullable: false),
-                    Price100 = table.Column<double>(type: "REAL", nullable: false),
-                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
-                    Barcode = table.Column<string>(type: "TEXT", nullable: true),
-                    BrandId = table.Column<int>(type: "INTEGER", nullable: true),
-                    SubCategoryId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Featured = table.Column<bool>(type: "INTEGER", nullable: true),
-                    Sale = table.Column<bool>(type: "INTEGER", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Count = table.Column<int>(type: "INTEGER", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Brands_BrandId",
-                        column: x => x.BrandId,
-                        principalTable: "Brands",
+                        name: "FK_ShoppingCarts_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Products_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
+                        name: "FK_ShoppingCarts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_SubCategories_SubCategoryId",
-                        column: x => x.SubCategoryId,
-                        principalTable: "SubCategories",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -359,32 +390,6 @@ namespace DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderDetails_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ShoppingCarts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Count = table.Column<int>(type: "INTEGER", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ShoppingCarts_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ShoppingCarts_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -436,12 +441,12 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "Author", "Barcode", "BrandId", "CategoryId", "CreateDate", "Description", "Featured", "ISBN", "ImageUrl", "ListPrice", "Price", "Price100", "Price50", "Sale", "SubCategoryId", "Title", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, "Billy Spark", "345345566456", 1, 1, new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(87), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "SWD9999001", "\\images\\product\\fortune of time.jpg", 99.0, 90.0, 80.0, 85.0, false, 1, "Fortune of Time", new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(88) },
-                    { 2, "Nancy Hoover", "345345566456", 1, 1, new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(94), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "CAW777777701", "\\images\\product\\dark skies.jpg", 40.0, 30.0, 20.0, 25.0, false, 1, "Dark Skies", new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(95) },
-                    { 3, "Julian Button", "345345566456", 2, 2, new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(100), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "RITO5555501", "\\images\\product\\vanish in the sunset.jpg", 55.0, 50.0, 35.0, 40.0, false, 2, "Vanish in the Sunset", new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(101) },
-                    { 4, "Abby Muscles", "345345566456", 2, 2, new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(106), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "WS3333333301", "\\images\\product\\cotton candy.jpg", 70.0, 65.0, 55.0, 60.0, false, 2, "Cotton Candy", new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(107) },
-                    { 5, "Ron Parker", "345345566456", 3, 3, new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(112), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "SOTJ1111111101", "\\images\\product\\rock in the ocean back.jpg", 30.0, 27.0, 20.0, 25.0, false, 3, "Rock in the Ocean", new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(113) },
-                    { 6, "Laura Phantom", "345345566456", 3, 3, new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(118), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "FOT000000001", "\\images\\product\\leaves and wonders.jpg", 25.0, 23.0, 20.0, 22.0, false, 3, "Leaves and Wonders", new DateTime(2024, 4, 27, 22, 14, 59, 857, DateTimeKind.Local).AddTicks(119) }
+                    { 1, "Billy Spark", "345345566456", 1, 1, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4706), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "SWD9999001", "\\images\\product\\fortune of time.jpg", 99.0, 90.0, 80.0, 85.0, false, 1, "Fortune of Time", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4707) },
+                    { 2, "Nancy Hoover", "345345566456", 1, 1, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4713), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "CAW777777701", "\\images\\product\\dark skies.jpg", 40.0, 30.0, 20.0, 25.0, false, 1, "Dark Skies", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4714) },
+                    { 3, "Julian Button", "345345566456", 2, 2, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4719), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "RITO5555501", "\\images\\product\\vanish in the sunset.jpg", 55.0, 50.0, 35.0, 40.0, false, 2, "Vanish in the Sunset", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4720) },
+                    { 4, "Abby Muscles", "345345566456", 2, 2, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4725), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "WS3333333301", "\\images\\product\\cotton candy.jpg", 70.0, 65.0, 55.0, 60.0, false, 2, "Cotton Candy", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4726) },
+                    { 5, "Ron Parker", "345345566456", 3, 3, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4732), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "SOTJ1111111101", "\\images\\product\\rock in the ocean back.jpg", 30.0, 27.0, 20.0, 25.0, false, 3, "Rock in the Ocean", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4733) },
+                    { 6, "Laura Phantom", "345345566456", 3, 3, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4738), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "FOT000000001", "\\images\\product\\leaves and wonders.jpg", 25.0, 23.0, 20.0, 22.0, false, 3, "Leaves and Wonders", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4739) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -480,6 +485,11 @@ namespace DataAccess.Migrations
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_CompanyId",
+                table: "AspNetUsers",
+                column: "CompanyId");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -550,9 +560,6 @@ namespace DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Company");
-
-            migrationBuilder.DropTable(
                 name: "OrderDetails");
 
             migrationBuilder.DropTable(
@@ -581,6 +588,9 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "SubCategories");
+
+            migrationBuilder.DropTable(
+                name: "Company");
         }
     }
 }

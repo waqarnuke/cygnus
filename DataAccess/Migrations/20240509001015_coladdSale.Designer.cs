@@ -3,16 +3,19 @@ using System;
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DataAccess.Migrations.cygnus
+namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    partial class AppIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240509001015_coladdSale")]
+    partial class coladdSale
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -381,6 +384,8 @@ namespace DataAccess.Migrations.cygnus
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -510,9 +515,15 @@ namespace DataAccess.Migrations.cygnus
                     b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool?>("Featured")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ISBN")
                         .IsRequired()
@@ -533,11 +544,17 @@ namespace DataAccess.Migrations.cygnus
                     b.Property<double>("Price50")
                         .HasColumnType("REAL");
 
+                    b.Property<bool?>("Sale")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("SubCategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdateDate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -555,85 +572,127 @@ namespace DataAccess.Migrations.cygnus
                         {
                             Id = 1,
                             Author = "Billy Spark",
+                            Barcode = "345345566456",
+                            BrandId = 1,
                             CategoryId = 1,
+                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4706),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
                             ISBN = "SWD9999001",
                             ImageUrl = "\\images\\product\\fortune of time.jpg",
                             ListPrice = 99.0,
                             Price = 90.0,
                             Price100 = 80.0,
                             Price50 = 85.0,
-                            Title = "Fortune of Time"
+                            Sale = false,
+                            SubCategoryId = 1,
+                            Title = "Fortune of Time",
+                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4707)
                         },
                         new
                         {
                             Id = 2,
                             Author = "Nancy Hoover",
+                            Barcode = "345345566456",
+                            BrandId = 1,
                             CategoryId = 1,
+                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4713),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
                             ISBN = "CAW777777701",
                             ImageUrl = "\\images\\product\\dark skies.jpg",
                             ListPrice = 40.0,
                             Price = 30.0,
                             Price100 = 20.0,
                             Price50 = 25.0,
-                            Title = "Dark Skies"
+                            Sale = false,
+                            SubCategoryId = 1,
+                            Title = "Dark Skies",
+                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4714)
                         },
                         new
                         {
                             Id = 3,
                             Author = "Julian Button",
+                            Barcode = "345345566456",
+                            BrandId = 2,
                             CategoryId = 2,
+                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4719),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
                             ISBN = "RITO5555501",
                             ImageUrl = "\\images\\product\\vanish in the sunset.jpg",
                             ListPrice = 55.0,
                             Price = 50.0,
                             Price100 = 35.0,
                             Price50 = 40.0,
-                            Title = "Vanish in the Sunset"
+                            Sale = false,
+                            SubCategoryId = 2,
+                            Title = "Vanish in the Sunset",
+                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4720)
                         },
                         new
                         {
                             Id = 4,
                             Author = "Abby Muscles",
+                            Barcode = "345345566456",
+                            BrandId = 2,
                             CategoryId = 2,
+                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4725),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
                             ISBN = "WS3333333301",
                             ImageUrl = "\\images\\product\\cotton candy.jpg",
                             ListPrice = 70.0,
                             Price = 65.0,
                             Price100 = 55.0,
                             Price50 = 60.0,
-                            Title = "Cotton Candy"
+                            Sale = false,
+                            SubCategoryId = 2,
+                            Title = "Cotton Candy",
+                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4726)
                         },
                         new
                         {
                             Id = 5,
                             Author = "Ron Parker",
+                            Barcode = "345345566456",
+                            BrandId = 3,
                             CategoryId = 3,
+                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4732),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
                             ISBN = "SOTJ1111111101",
                             ImageUrl = "\\images\\product\\rock in the ocean back.jpg",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
                             Price50 = 25.0,
-                            Title = "Rock in the Ocean"
+                            Sale = false,
+                            SubCategoryId = 3,
+                            Title = "Rock in the Ocean",
+                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4733)
                         },
                         new
                         {
                             Id = 6,
                             Author = "Laura Phantom",
+                            Barcode = "345345566456",
+                            BrandId = 3,
                             CategoryId = 3,
+                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4738),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
                             ISBN = "FOT000000001",
                             ImageUrl = "\\images\\product\\leaves and wonders.jpg",
                             ListPrice = 25.0,
                             Price = 23.0,
                             Price100 = 20.0,
                             Price50 = 22.0,
-                            Title = "Leaves and Wonders"
+                            Sale = false,
+                            SubCategoryId = 3,
+                            Title = "Leaves and Wonders",
+                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4739)
                         });
                 });
 
@@ -659,6 +718,19 @@ namespace DataAccess.Migrations.cygnus
                     b.HasIndex("ProductId");
 
                     b.ToTable("ShoppingCarts");
+                });
+
+            modelBuilder.Entity("Models.SiteConfig", b =>
+                {
+                    b.Property<string>("key")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("key");
+
+                    b.ToTable("SiteConfig");
                 });
 
             modelBuilder.Entity("Models.SubCategory", b =>
@@ -754,6 +826,15 @@ namespace DataAccess.Migrations.cygnus
                         .IsRequired();
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Models.Identity.AppUser", b =>
+                {
+                    b.HasOne("Models.Company", "Compnay")
+                        .WithMany()
+                        .HasForeignKey("CompanyId");
+
+                    b.Navigation("Compnay");
                 });
 
             modelBuilder.Entity("Models.OrderDetail", b =>
