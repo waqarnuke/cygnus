@@ -26,6 +26,7 @@ namespace Utility.Common
         public const string PaymentStatusApproved = "Approved";
         public const string PaymentStatusDelayedPayment = "ApprovedForDelayedPayment";
         public const string PaymenttatusRejected = "Rejected";
+        
 
 
         //Session cart

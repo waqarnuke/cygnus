@@ -39,5 +39,6 @@ namespace Models
         [Required]
         public string Name { get; set; }
         public string? SessionId { get; set; }
+        public string? PaymentMethod { get; set; }
     }
 }
