@@ -18,6 +18,8 @@ namespace Web.Controllers
 
             ShopVM shopVM = new ShopVM();
             
+            shopvmObj.SortBy = shopvmObj.SortBy.HasValue ? shopvmObj.SortBy.Value : 1;
+
             shopVM.PageNo = shopvmObj.PageNo.HasValue ? shopvmObj.PageNo > 0 ? shopvmObj.PageNo.Value : 1 : 1;
 
             var totalRecords = _unitOfWork.Product.GetCount(search != null ? s => s.Title.Contains(search) : null);
