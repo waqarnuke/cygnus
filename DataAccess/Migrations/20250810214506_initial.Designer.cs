@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20240509001015_coladdSale")]
-    partial class coladdSale
+    [Migration("20250810214506_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -170,17 +170,17 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Action"
+                            Name = "Vape"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "SciFi"
+                            Name = "Pipe"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "History"
+                            Name = "Burners"
                         });
                 });
 
@@ -210,19 +210,43 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             DisplayOrder = 1,
-                            Name = "Action"
+                            Name = "New"
                         },
                         new
                         {
                             Id = 2,
                             DisplayOrder = 2,
-                            Name = "SciFi"
+                            Name = "Sale"
                         },
                         new
                         {
                             Id = 3,
                             DisplayOrder = 3,
-                            Name = "History"
+                            Name = "Disposables"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DisplayOrder = 4,
+                            Name = "E-Liquids"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DisplayOrder = 5,
+                            Name = "Vape kits"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DisplayOrder = 6,
+                            Name = "Accessories"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DisplayOrder = 6,
+                            Name = "Multifarious"
                         });
                 });
 
@@ -544,6 +568,9 @@ namespace DataAccess.Migrations
                     b.Property<double>("Price50")
                         .HasColumnType("REAL");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool?>("Sale")
                         .HasColumnType("INTEGER");
 
@@ -571,128 +598,266 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Author = "Billy Spark",
+                            Author = "Spark",
                             Barcode = "345345566456",
                             BrandId = 1,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4706),
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5795),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "SWD9999001",
-                            ImageUrl = "\\images\\product\\fortune of time.jpg",
+                            ImageUrl = "\\images\\product\\1.jpg",
                             ListPrice = 99.0,
                             Price = 90.0,
                             Price100 = 80.0,
                             Price50 = 85.0,
+                            Quantity = 15,
                             Sale = false,
                             SubCategoryId = 1,
-                            Title = "Fortune of Time",
-                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4707)
+                            Title = "Vape Time",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5798)
                         },
                         new
                         {
                             Id = 2,
-                            Author = "Nancy Hoover",
+                            Author = "Nancy",
                             Barcode = "345345566456",
                             BrandId = 1,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4713),
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5806),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "CAW777777701",
-                            ImageUrl = "\\images\\product\\dark skies.jpg",
+                            ImageUrl = "\\images\\product\\2.jpg",
                             ListPrice = 40.0,
                             Price = 30.0,
                             Price100 = 20.0,
                             Price50 = 25.0,
+                            Quantity = 15,
                             Sale = false,
                             SubCategoryId = 1,
-                            Title = "Dark Skies",
-                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4714)
+                            Title = "Vape Dark",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5807)
                         },
                         new
                         {
                             Id = 3,
-                            Author = "Julian Button",
+                            Author = "Julian",
                             Barcode = "345345566456",
                             BrandId = 2,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4719),
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5813),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "RITO5555501",
-                            ImageUrl = "\\images\\product\\vanish in the sunset.jpg",
+                            ImageUrl = "\\images\\product\\3.jpg",
                             ListPrice = 55.0,
                             Price = 50.0,
                             Price100 = 35.0,
                             Price50 = 40.0,
+                            Quantity = 15,
                             Sale = false,
                             SubCategoryId = 2,
-                            Title = "Vanish in the Sunset",
-                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4720)
+                            Title = "Vape Sunset",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5814)
                         },
                         new
                         {
                             Id = 4,
-                            Author = "Abby Muscles",
+                            Author = "Abby",
                             Barcode = "345345566456",
                             BrandId = 2,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4725),
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5821),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "WS3333333301",
-                            ImageUrl = "\\images\\product\\cotton candy.jpg",
+                            ImageUrl = "\\images\\product\\4.jpg",
                             ListPrice = 70.0,
                             Price = 65.0,
                             Price100 = 55.0,
                             Price50 = 60.0,
+                            Quantity = 15,
                             Sale = false,
                             SubCategoryId = 2,
-                            Title = "Cotton Candy",
-                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4726)
+                            Title = "Vape Candy",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5822)
                         },
                         new
                         {
                             Id = 5,
-                            Author = "Ron Parker",
+                            Author = "Ron",
                             Barcode = "345345566456",
                             BrandId = 3,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4732),
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5827),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "SOTJ1111111101",
-                            ImageUrl = "\\images\\product\\rock in the ocean back.jpg",
+                            ImageUrl = "\\images\\product\\5.jpg",
                             ListPrice = 30.0,
                             Price = 27.0,
                             Price100 = 20.0,
                             Price50 = 25.0,
+                            Quantity = 15,
                             Sale = false,
                             SubCategoryId = 3,
-                            Title = "Rock in the Ocean",
-                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4733)
+                            Title = "Vape Rock",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5828)
                         },
                         new
                         {
                             Id = 6,
-                            Author = "Laura Phantom",
+                            Author = "Laura",
                             Barcode = "345345566456",
                             BrandId = 3,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4738),
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5834),
                             Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
                             Featured = false,
                             ISBN = "FOT000000001",
-                            ImageUrl = "\\images\\product\\leaves and wonders.jpg",
+                            ImageUrl = "\\images\\product\\6.jpg",
                             ListPrice = 25.0,
                             Price = 23.0,
                             Price100 = 20.0,
                             Price50 = 22.0,
+                            Quantity = 15,
                             Sale = false,
                             SubCategoryId = 3,
-                            Title = "Leaves and Wonders",
-                            UpdateDate = new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4739)
+                            Title = "Vape Leaves",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5835)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Author = "Spark",
+                            Barcode = "345345566456",
+                            BrandId = 1,
+                            CategoryId = 1,
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5841),
+                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
+                            ISBN = "SWD9999001",
+                            ImageUrl = "\\images\\product\\7.jpg",
+                            ListPrice = 99.0,
+                            Price = 90.0,
+                            Price100 = 80.0,
+                            Price50 = 85.0,
+                            Quantity = 15,
+                            Sale = false,
+                            SubCategoryId = 1,
+                            Title = "Vape Time",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5842)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Author = "Nancy",
+                            Barcode = "345345566456",
+                            BrandId = 1,
+                            CategoryId = 1,
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5849),
+                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
+                            ISBN = "CAW777777701",
+                            ImageUrl = "\\images\\product\\8.jpg",
+                            ListPrice = 40.0,
+                            Price = 30.0,
+                            Price100 = 20.0,
+                            Price50 = 25.0,
+                            Quantity = 15,
+                            Sale = false,
+                            SubCategoryId = 1,
+                            Title = "Vape Dark",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5850)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Author = "Julian",
+                            Barcode = "345345566456",
+                            BrandId = 2,
+                            CategoryId = 2,
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5855),
+                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
+                            ISBN = "RITO5555501",
+                            ImageUrl = "\\images\\product\\9.jpg",
+                            ListPrice = 55.0,
+                            Price = 50.0,
+                            Price100 = 35.0,
+                            Price50 = 40.0,
+                            Quantity = 15,
+                            Sale = false,
+                            SubCategoryId = 2,
+                            Title = "Vape Sunset",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5856)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Author = "Abby",
+                            Barcode = "345345566456",
+                            BrandId = 2,
+                            CategoryId = 2,
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5862),
+                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
+                            ISBN = "WS3333333301",
+                            ImageUrl = "\\images\\product\\10.jpg",
+                            ListPrice = 70.0,
+                            Price = 65.0,
+                            Price100 = 55.0,
+                            Price50 = 60.0,
+                            Quantity = 15,
+                            Sale = false,
+                            SubCategoryId = 2,
+                            Title = "Vape Candy",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5863)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Author = "Ron",
+                            Barcode = "345345566456",
+                            BrandId = 3,
+                            CategoryId = 3,
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5869),
+                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
+                            ISBN = "SOTJ1111111101",
+                            ImageUrl = "\\images\\product\\11.jpg",
+                            ListPrice = 30.0,
+                            Price = 27.0,
+                            Price100 = 20.0,
+                            Price50 = 25.0,
+                            Quantity = 15,
+                            Sale = false,
+                            SubCategoryId = 3,
+                            Title = "Vape Rock",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5870)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Author = "Laura",
+                            Barcode = "345345566456",
+                            BrandId = 3,
+                            CategoryId = 3,
+                            CreateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5875),
+                            Description = "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ",
+                            Featured = false,
+                            ISBN = "FOT000000001",
+                            ImageUrl = "\\images\\product\\12.jpg",
+                            ListPrice = 25.0,
+                            Price = 23.0,
+                            Price100 = 20.0,
+                            Price50 = 22.0,
+                            Quantity = 15,
+                            Sale = false,
+                            SubCategoryId = 3,
+                            Title = "Vape Leaves",
+                            UpdateDate = new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5876)
                         });
                 });
 
@@ -752,17 +917,17 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Action"
+                            Name = "Vape"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "SciFi"
+                            Name = "Pipe"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "History"
+                            Name = "Burners"
                         });
                 });
 

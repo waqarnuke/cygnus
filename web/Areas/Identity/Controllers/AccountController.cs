@@ -89,7 +89,7 @@ namespace Web.Controllers
                 DisplayName = registerVM.Name,
                 NormalizedEmail = registerVM.Email.ToUpper(),
                 EmailConfirmed = true,
-                PhoneNumber = registerVM.PhoneNumber
+                PhoneNumber = registerVM.PhoneNumber,
             } ;
             
             if(registerVM.Role == SD.Role_Company)

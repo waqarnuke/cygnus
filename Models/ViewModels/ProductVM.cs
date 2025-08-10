@@ -5,12 +5,12 @@ namespace Models.ViewModels
 {
     public class ProductVM
     {
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
         [ValidateNever]
-        public IEnumerable<SelectListItem> CategoryList { get; set; }
+        public IEnumerable<SelectListItem>? CategoryList { get; set; }
         [ValidateNever]
-        public IEnumerable<SelectListItem> BrandList { get; set; }
+        public IEnumerable<SelectListItem>? BrandList { get; set; }
         [ValidateNever]
-        public IEnumerable<SelectListItem> SubCategoryList { get; set; }
+        public IEnumerable<SelectListItem>? SubCategoryList { get; set; }
     }
 }

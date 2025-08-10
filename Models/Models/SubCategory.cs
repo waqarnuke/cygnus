@@ -9,6 +9,6 @@ namespace Models
         [Required]
         [DisplayName("CategoryType Name")]
         [MaxLength(30)]
-        public string Name { get; set; } 
+        public string? Name { get; set; } 
     }
 }

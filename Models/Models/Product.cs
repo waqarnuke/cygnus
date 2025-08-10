@@ -11,13 +11,13 @@ namespace Models
         public int Id { get; set; }
 
         [Required]
-        public string Title { get; set; }
+        public string? Title { get; set; }
         [Required]
-        public string Description { get; set; }
+        public string? Description { get; set; }
         [Required]
-        public string ISBN { get; set; }
+        public string? ISBN { get; set; }
         [Required]
-        public string Author { get; set; }
+        public string? Author { get; set; }
         [Required]
         [Display(Name = "List Price")]
         [Range(1,1000)]
@@ -42,21 +42,21 @@ namespace Models
         
         [ForeignKey("CategoryId")]
         [ValidateNever]
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
         
         [ValidateNever]
-        public string ImageUrl { get; set; }
-        public string Barcode { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? Barcode { get; set; }
 
         [Display(Name = "Brand")]
         public int? BrandId { get; set; }
         [ValidateNever]
-        public Brand Brands { get; set; }
+        public Brand? Brands { get; set; }
 
         [Display(Name = "Sub Category")]
         public int? SubCategoryId { get; set; }
         [ValidateNever]
-        public SubCategory SubCategory { get; set; }
+        public SubCategory? SubCategory { get; set; }
         public bool? Featured { get; set; } = false;
         public bool? Sale { get; set; } = false;
         public DateTime CreateDate { get; set; } = DateTime.Now;

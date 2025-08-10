@@ -9,7 +9,7 @@ namespace Models
         [Required]
         [DisplayName("Brand Name")]
         [MaxLength(30)]
-        public string Name { get; set; }
-        public string ImageUrl { get; set; }   
+        public string? Name { get; set; }
+        public string? ImageUrl { get; set; }   
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class coladdSale : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -174,7 +174,8 @@ namespace DataAccess.Migrations
                     Featured = table.Column<bool>(type: "INTEGER", nullable: true),
                     Sale = table.Column<bool>(type: "INTEGER", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    UpdateDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -401,9 +402,9 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "ImageUrl", "Name" },
                 values: new object[,]
                 {
-                    { 1, null, "Action" },
-                    { 2, null, "SciFi" },
-                    { 3, null, "History" }
+                    { 1, null, "Vape" },
+                    { 2, null, "Pipe" },
+                    { 3, null, "Burners" }
                 });
 
             migrationBuilder.InsertData(
@@ -411,9 +412,13 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "DisplayOrder", "ImageUrl", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1, null, "Action" },
-                    { 2, 2, null, "SciFi" },
-                    { 3, 3, null, "History" }
+                    { 1, 1, null, "New" },
+                    { 2, 2, null, "Sale" },
+                    { 3, 3, null, "Disposables" },
+                    { 4, 4, null, "E-Liquids" },
+                    { 5, 5, null, "Vape kits" },
+                    { 6, 6, null, "Accessories" },
+                    { 7, 6, null, "Multifarious" }
                 });
 
             migrationBuilder.InsertData(
@@ -431,22 +436,28 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Action" },
-                    { 2, "SciFi" },
-                    { 3, "History" }
+                    { 1, "Vape" },
+                    { 2, "Pipe" },
+                    { 3, "Burners" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "Author", "Barcode", "BrandId", "CategoryId", "CreateDate", "Description", "Featured", "ISBN", "ImageUrl", "ListPrice", "Price", "Price100", "Price50", "Sale", "SubCategoryId", "Title", "UpdateDate" },
+                columns: new[] { "Id", "Author", "Barcode", "BrandId", "CategoryId", "CreateDate", "Description", "Featured", "ISBN", "ImageUrl", "ListPrice", "Price", "Price100", "Price50", "Quantity", "Sale", "SubCategoryId", "Title", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, "Billy Spark", "345345566456", 1, 1, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4706), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "SWD9999001", "\\images\\product\\fortune of time.jpg", 99.0, 90.0, 80.0, 85.0, false, 1, "Fortune of Time", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4707) },
-                    { 2, "Nancy Hoover", "345345566456", 1, 1, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4713), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "CAW777777701", "\\images\\product\\dark skies.jpg", 40.0, 30.0, 20.0, 25.0, false, 1, "Dark Skies", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4714) },
-                    { 3, "Julian Button", "345345566456", 2, 2, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4719), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "RITO5555501", "\\images\\product\\vanish in the sunset.jpg", 55.0, 50.0, 35.0, 40.0, false, 2, "Vanish in the Sunset", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4720) },
-                    { 4, "Abby Muscles", "345345566456", 2, 2, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4725), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "WS3333333301", "\\images\\product\\cotton candy.jpg", 70.0, 65.0, 55.0, 60.0, false, 2, "Cotton Candy", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4726) },
-                    { 5, "Ron Parker", "345345566456", 3, 3, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4732), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "SOTJ1111111101", "\\images\\product\\rock in the ocean back.jpg", 30.0, 27.0, 20.0, 25.0, false, 3, "Rock in the Ocean", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4733) },
-                    { 6, "Laura Phantom", "345345566456", 3, 3, new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4738), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "FOT000000001", "\\images\\product\\leaves and wonders.jpg", 25.0, 23.0, 20.0, 22.0, false, 3, "Leaves and Wonders", new DateTime(2024, 5, 8, 19, 10, 15, 539, DateTimeKind.Local).AddTicks(4739) }
+                    { 1, "Spark", "345345566456", 1, 1, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5795), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "SWD9999001", "\\images\\product\\1.jpg", 99.0, 90.0, 80.0, 85.0, 15, false, 1, "Vape Time", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5798) },
+                    { 2, "Nancy", "345345566456", 1, 1, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5806), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "CAW777777701", "\\images\\product\\2.jpg", 40.0, 30.0, 20.0, 25.0, 15, false, 1, "Vape Dark", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5807) },
+                    { 3, "Julian", "345345566456", 2, 2, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5813), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "RITO5555501", "\\images\\product\\3.jpg", 55.0, 50.0, 35.0, 40.0, 15, false, 2, "Vape Sunset", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5814) },
+                    { 4, "Abby", "345345566456", 2, 2, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5821), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "WS3333333301", "\\images\\product\\4.jpg", 70.0, 65.0, 55.0, 60.0, 15, false, 2, "Vape Candy", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5822) },
+                    { 5, "Ron", "345345566456", 3, 3, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5827), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "SOTJ1111111101", "\\images\\product\\5.jpg", 30.0, 27.0, 20.0, 25.0, 15, false, 3, "Vape Rock", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5828) },
+                    { 6, "Laura", "345345566456", 3, 3, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5834), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "FOT000000001", "\\images\\product\\6.jpg", 25.0, 23.0, 20.0, 22.0, 15, false, 3, "Vape Leaves", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5835) },
+                    { 7, "Spark", "345345566456", 1, 1, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5841), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "SWD9999001", "\\images\\product\\7.jpg", 99.0, 90.0, 80.0, 85.0, 15, false, 1, "Vape Time", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5842) },
+                    { 8, "Nancy", "345345566456", 1, 1, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5849), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "CAW777777701", "\\images\\product\\8.jpg", 40.0, 30.0, 20.0, 25.0, 15, false, 1, "Vape Dark", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5850) },
+                    { 9, "Julian", "345345566456", 2, 2, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5855), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "RITO5555501", "\\images\\product\\9.jpg", 55.0, 50.0, 35.0, 40.0, 15, false, 2, "Vape Sunset", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5856) },
+                    { 10, "Abby", "345345566456", 2, 2, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5862), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "WS3333333301", "\\images\\product\\10.jpg", 70.0, 65.0, 55.0, 60.0, 15, false, 2, "Vape Candy", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5863) },
+                    { 11, "Ron", "345345566456", 3, 3, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5869), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "SOTJ1111111101", "\\images\\product\\11.jpg", 30.0, 27.0, 20.0, 25.0, 15, false, 3, "Vape Rock", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5870) },
+                    { 12, "Laura", "345345566456", 3, 3, new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5875), "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", false, "FOT000000001", "\\images\\product\\12.jpg", 25.0, 23.0, 20.0, 22.0, 15, false, 3, "Vape Leaves", new DateTime(2025, 8, 10, 16, 45, 5, 717, DateTimeKind.Local).AddTicks(5876) }
                 });
 
             migrationBuilder.CreateIndex(

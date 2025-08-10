@@ -6,7 +6,7 @@ namespace DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly AppIdentityDbContext _context;
-         private readonly AppIdentityDbContext _contextIdentity;
+        //private readonly AppIdentityDbContext _contextIdentity;
         public ICategoryRepository category {get; private set;}
 
         public IProductRepository Product {get; private set;}

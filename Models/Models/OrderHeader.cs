@@ -8,10 +8,10 @@ namespace Models
     public class OrderHeader
     {
         public int Id { get; set; }
-        public string ApplicationUserId { get; set; }
+        public string? ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
-        public AppUser ApplicationUser { get; set; }
+        public AppUser? ApplicationUser { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ShippingDate { get; set; }
         public double OrderTotal { get; set; }
@@ -25,19 +25,19 @@ namespace Models
         public string? PaymentIntentId { get; set; }
         [Required]
         [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
         [Required]
         [Display(Name = "Street address")]
-        public string StreetAddress { get; set; }
+        public string? StreetAddress { get; set; }
         [Required]
-        public string City { get; set; }
+        public string? City { get; set; }
         [Required]
-        public string State { get; set; }
+        public string? State { get; set; }
         [Required]
         [Display(Name = "Zip Code")]
-        public string PostalCode { get; set; }
+        public string? PostalCode { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public string? SessionId { get; set; }
     }
 }

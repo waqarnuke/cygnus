@@ -14,7 +14,7 @@ namespace DataAccess.Repository
 
         public SiteConfig GetSiteConfig(string key)
         {
-            return _context.SiteConfig.Find(key);
+            return _context.SiteConfig.Find(key) ?? new SiteConfig();;
         }
 
         public void Update(SiteConfig obj)

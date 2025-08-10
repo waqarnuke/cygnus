@@ -11,13 +11,13 @@ namespace Models
         [ForeignKey("ProductId")]
         [ValidateNever]
         public  int ProductId { get; set; }
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
         [Range(1, 1000, ErrorMessage ="Please enter a value between 1 and 1000")]
         public int Count { get; set; }
-        public string ApplicationUserId { get; set; }
+        public string? ApplicationUserId { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
-        public AppUser ApplicationUser { get; set; }
+        public AppUser? ApplicationUser { get; set; }
         [NotMapped]
         public double Price { get; set; }
     }
