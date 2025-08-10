@@ -34,5 +34,7 @@ namespace Utility.Common
         public const string SessionCart = "SessionShoppingCart";
         
 
+         // Payment Mode
+        public const string PaymentMode = "Cash";
     }
 }

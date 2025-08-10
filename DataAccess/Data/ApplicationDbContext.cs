@@ -24,7 +24,7 @@ namespace DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //base.OnModelCreating(modelBuilder); // its use for maping id when you update the identitydB
-
+            
             modelBuilder.Entity<Category>().HasData(
                 new Category {Id=1 , Name="Action", DisplayOrder=1},
                 new Category {Id=2 , Name="SciFi", DisplayOrder=2},

@@ -96,22 +96,34 @@ namespace Web.Areas.Admin.Controllers
         {
             var orderHeaderFromDB = _unitOfWork.OrderHeader.Get(u => u.Id == OrderVM.OrderHeader.Id);
 
-            if(orderHeaderFromDB.PaymentStatus == SD.PaymentStatusApproved){
-                var options =  new RefundCreateOptions {
-                    Reason = RefundReasons.RequestedByCustomer,
-                    PaymentIntent = orderHeaderFromDB.PaymentIntentId
-                };
+            if(orderHeaderFromDB.PaymentMethod != SD.PaymentMode )
+            {
+                if(orderHeaderFromDB.PaymentStatus == SD.PaymentStatusApproved){
+                    var options =  new RefundCreateOptions {
+                        Reason = RefundReasons.RequestedByCustomer,
+                        PaymentIntent = orderHeaderFromDB.PaymentIntentId
+                    };
 
-                var service = new RefundService();
-                Refund refund = service.Create(options);
+                    var service = new RefundService();
+                    Refund refund = service.Create(options);
 
-                _unitOfWork.OrderHeader.UpdateStatus(orderHeaderFromDB.Id, SD.StatusCancelled, SD.StatusRefunded);
+                    _unitOfWork.OrderHeader.UpdateStatus(orderHeaderFromDB.Id, SD.StatusCancelled, SD.StatusRefunded);
+                }
+                else
+                {
+                    _unitOfWork.OrderHeader.UpdateStatus(orderHeaderFromDB.Id, SD.StatusCancelled, SD.StatusCancelled);
+                }
             }
             else
             {
-                _unitOfWork.OrderHeader.UpdateStatus(orderHeaderFromDB.Id, SD.StatusCancelled, SD.StatusCancelled);
+                if(orderHeaderFromDB.PaymentStatus == SD.PaymentStatusApproved){
+                    _unitOfWork.OrderHeader.UpdateStatus(orderHeaderFromDB.Id, SD.StatusCancelled, SD.StatusRefunded);
+                }
+                else
+                {
+                    _unitOfWork.OrderHeader.UpdateStatus(orderHeaderFromDB.Id, SD.StatusCancelled, SD.StatusCancelled);
+                }
             }
-
             _unitOfWork.Save();
             TempData["Success"] = "Order Cancelled Successfully.";
             return RedirectToAction(nameof(Details), new {orderId =OrderVM.OrderHeader.Id});

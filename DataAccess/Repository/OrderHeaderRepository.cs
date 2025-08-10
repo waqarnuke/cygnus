@@ -1,3 +1,4 @@
+using DataAccess.Data;
 using DataAccess.Repository.IRepository;
 using Models;
 
@@ -5,8 +6,8 @@ namespace DataAccess.Repository
 {
     public class OrderHeaderRepository : Repository<OrderHeader>, IOrderHeaderRepository
     {
-        private readonly ApplicationDbContext _context;
-        public OrderHeaderRepository(ApplicationDbContext context) : base(context)
+        private readonly AppIdentityDbContext _context;
+        public OrderHeaderRepository(AppIdentityDbContext context) : base(context)
         {
             _context = context;
         }

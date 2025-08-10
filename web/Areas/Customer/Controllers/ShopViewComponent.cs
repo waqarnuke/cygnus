@@ -24,7 +24,7 @@ namespace Web.Controllers
 
             var totalRecords = _unitOfWork.Product.GetCount(search != null ? s => s.Title.Contains(search) : null);
 
-            shopVM.Products = _unitOfWork.Product.GetAll(includeProperties:"Category");
+            shopVM.Products =  _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
             
             if(shopVM.Products != null)
             {

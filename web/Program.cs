@@ -18,12 +18,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<ApplicationDbContext>(
-    options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
-
-builder.Services.AddIdentityServices(builder.Configuration);
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(option => {
@@ -33,6 +30,7 @@ builder.Services.AddSession(option => {
 });
 
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 
@@ -57,13 +55,12 @@ app.UseAuthorization();
 app.UseSession();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{Area=Customer}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{Area=Customer}/{controller=Shop}/{action=Index}/{id?}");
 
 
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
-var context = services.GetRequiredService<ApplicationDbContext>();
 
 var identityContext = services.GetRequiredService<AppIdentityDbContext>();
 var userManager = services.GetRequiredService<UserManager<AppUser>>();
@@ -72,7 +69,6 @@ var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 var logger = services.GetRequiredService<ILogger<Program>>();
 try
 {
-    await context.Database.MigrateAsync();
     await identityContext.Database.MigrateAsync();
     await AppIdentityDbContextSeed.SeedUsersAsync(userManager,roleManager);
 }

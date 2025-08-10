@@ -20,7 +20,6 @@ public class CartController : Controller
 {
     private readonly ILogger<CartController> _logger;
     private readonly IUnitOfWork _unitOfwork;
-    private readonly UserManager<AppUser> _userManager;
     private readonly IEmailSender _emailSender;
 
     [BindProperty]
@@ -178,7 +177,7 @@ public class CartController : Controller
     public IActionResult OrderConfirmation(int Id)
     {
         OrderHeader orderHeader = _unitOfwork .OrderHeader.Get(u => u.Id == Id,includeProperties:"ApplicationUser");
-        if(orderHeader.PaymentStatus != SD.PaymentStatusDelayedPayment)
+        if(orderHeader.PaymentStatus != SD.PaymentStatusDelayedPayment && orderHeader.PaymentMethod != SD.PaymentMode)
         {
             //this is an ordeer by customer
             
@@ -189,6 +188,16 @@ public class CartController : Controller
                 _unitOfwork.OrderHeader.UpdateStatus(Id  ,SD.StatusApproved, SD.PaymentStatusApproved);
                 _unitOfwork.Save();
             }
+
+            HttpContext.Session.Clear();
+        }
+        else
+        {
+            Guid uniqueId = Guid.NewGuid();
+            _unitOfwork.OrderHeader.UpdateStripePaymentId(Id
+                ,"session_"+uniqueId , "payment_"+uniqueId);
+            _unitOfwork.OrderHeader.UpdateStatus(Id  ,SD.StatusApproved, SD.PaymentStatusPending);
+            _unitOfwork.Save();
 
             HttpContext.Session.Clear();
         }
@@ -270,12 +279,12 @@ public class CartController : Controller
         if(appuser.CompanyId.GetValueOrDefault() == 0)
         {
             ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusPending;
-            ShoppingCartVM.OrderHeader.OrderStatus = SD.StatusPending;
+            ShoppingCartVM.OrderHeader.OrderStatus = ShoppingCartVM.OrderHeader.PaymentMethod == SD.PaymentMode ? SD.StatusPending : SD.StatusApproved;
         }
         else
         {
             ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusDelayedPayment;
-            ShoppingCartVM.OrderHeader.OrderStatus = SD.StatusApproved;
+            ShoppingCartVM.OrderHeader.OrderStatus = ShoppingCartVM.OrderHeader.PaymentMethod == SD.PaymentMode ? SD.StatusPending : SD.StatusApproved;
         }
 
         if(ModelState.IsValid)
@@ -330,7 +339,7 @@ public class CartController : Controller
                 , session.Id, session.PaymentIntentId);
             
             _unitOfwork.Save();
-            Response.Headers.Add("Location", session.Url);
+            Response.Headers?.Add("Location", session.Url);
             return new StatusCodeResult(303);
 
         }
